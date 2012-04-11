@@ -5,7 +5,7 @@ from nose.tools import assert_equals
 
 @step(r'I create a sample user')
 def define_user(step):
-    u = User(email = "foo@bar.com", username="FooBar", password = "1234")
+    u = User(email = "foo@bar.com", username="FooBar", password = "1234" , password_checker = "1234")
     world.user = u
     assert isinstance(u,User)
     
@@ -40,5 +40,8 @@ def create_user_again(step):
 @step(r'Then It should not be valid')
 def validate_user(step):
     assert User.exists(world.user.name)
-    
+
+@step(r'Then passwords are equal')
+def pass_equal(step):
+    assert world.user.password == world.user.password_checker
     
