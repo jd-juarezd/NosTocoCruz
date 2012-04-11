@@ -11,17 +11,17 @@ def define_user(step):
     
 @step(r'It should be created correctly')
 def create_user(step):
-    assert not User.exists(world.user.username) and User.validateData(world.user.username, world.user.email, world.user.password)
+    assert not User.exists(world.user.username) and User.validateData(world.user.username, world.user.email, world.user.password, world.user.password_check)
 
 @step(r'The "(.*)" cannot be empty')
 def empty_field(step,field):
     world.user.field = ""
-    assert not User.validateData(world.user.username, world.user.email, world.user.password)
+    assert not User.validateData(world.user.username, world.user.email, world.user.password, world.user.password_check)
     
 @step(r'The "(.*)" should not accept "(.*)"')
 def rigth_format(step,field,word):
     world.user.field = word
-    assert not User.validateData(world.user.username, world.user.email, world.user.password)
+    assert not User.validateData(world.user.username, world.user.email, world.user.password, world.user.password_check)
     
 @step(r'be saved')
 def save_user(step):
@@ -43,6 +43,11 @@ def validate_user(step):
 
 @step(r'Then passwords are equal')
 def pass_equal(step):
-    assert world.user.password == world.user.password_checker
+    assert User.validate_passwords(world.user.password, world.user.password_checker)
+
+@step(r'Then password long is correct')
+def pass_long(step):
+    assert User.validate_password_long(world.user.password, 4, 60)
+
 
     
