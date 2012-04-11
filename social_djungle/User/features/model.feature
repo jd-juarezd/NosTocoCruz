@@ -6,8 +6,9 @@ Feature: Validating User Model
 		 
 	Scenario: Wrong email
 		When I create a sample user
-		Then The "email" cannot be empty
-		And The "email" should not accept "foo.@bar."
+		Then The email cannot be empty
+		And The email should not be longer than 50 characters
+		And The email should not accept "foo.@bar."
 		
 	Scenario: User already exists
 		When I create a sample user
