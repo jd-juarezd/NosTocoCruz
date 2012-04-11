@@ -44,4 +44,5 @@ def validate_user(step):
 @step(r'Then passwords are equal')
 def pass_equal(step):
     assert world.user.password == world.user.password_checker
+
     
