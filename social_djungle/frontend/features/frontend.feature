@@ -11,6 +11,7 @@ Feature: Frontend
         And I see a "text" input named "apellidos"
         And I see a "text" input named "email"
         And I see a "password" input named "password_register"
+        And I see a "password" input named "password_register_checker"
         
     Scenario: Home page
     	Given I access the url "/home"
