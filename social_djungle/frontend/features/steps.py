@@ -17,7 +17,7 @@ def access_url(step, url):
 
 @step(r'I see the title "(.*)"')
 def see_header(step, text):
-    title = world.cssselect('title')[0]
+    title = world.dom.cssselect('title')[0]
     assert title.text == text
 
 @step(r'There is the form "(.*)"')

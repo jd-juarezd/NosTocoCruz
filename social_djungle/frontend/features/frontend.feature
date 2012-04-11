@@ -4,7 +4,7 @@ Feature: Frontend
         Given I access the url "/"
         Then I see the title "Inicio"
         And There is the form "login"
-        And I see a "text" input named "user_name"
+        And I see a "text" input named "username"
         And I see a "password" input named "password"
         And There is the form "registro"
         And I see a "text" input named "nombre"
