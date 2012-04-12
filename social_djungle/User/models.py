@@ -1,7 +1,11 @@
 from django.db import models
+import re
 
-# Create your models here.
-class User(models.Model):
+class ValidationError(Exception):
+    def __init__(self, value):
+        self.value = value
+
+class Users(models.Model):
     username = models.CharField(max_length=50)
     email = models.EmailField()
     password = models.CharField(max_length=40) # SHA1 hash is 40 characters long
@@ -11,8 +15,19 @@ class User(models.Model):
     
     @classmethod
     def exists(cls, username):
-        res = cls.objects.filter(username=username)
-        if res:
-            return false
+        if Users.objects.filter(username=username):
+            return True
         else:
-            return true
+            return False
+    
+    @classmethod
+    def validateEmail(cls, email):
+        valid = (email.__len__ != 0) & (email.__len__<=50)
+        valid = valid and re.match('^(\w|[\._-])+@\w+\.\w+$',email)
+        return valid 
+
+    def saveUser(self):
+        if (not Users.objects.filter(username=self.username)):
+            self.save()
+        else:
+            raise ValidationError('User already exists in database')
