@@ -2,6 +2,7 @@ Feature: Validating User Model
 
 	Scenario: Validating User Login
 		When I create a sample user
+		Then password length is correct
 		Then It should be created correctly
 		 
 	Scenario: Wrong email

@@ -9,7 +9,11 @@ def define_user(step):
     u = Users(email = "foo@bar.com", username="FooBar", password = "1234")
     world.user = u
     assert isinstance(u,Users)
-    
+
+@step(r'Then password length is correct')
+def pass_long(step):
+    assert Users.validatePassword(world.user.password)
+
 @step(r'It should be created correctly')
 def create_user(step):
     assert not Users.exists(username=world.user.username)
