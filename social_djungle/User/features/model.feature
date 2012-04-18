@@ -17,4 +17,13 @@ Feature: Validating User Model
 		And saved
 		If I try to create it again
 		Then It should not be valid
+	
+	Scenario: User attributes are correctly stored
+		When I create a new user with personal information
+		Then It should have a name
+		And It should have a surname
+		And It should have a birthdate
+		And It should have a gender
+		And It should have a country
+		
 		
