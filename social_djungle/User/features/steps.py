@@ -51,7 +51,54 @@ def create_user_again(step):
 @step(r'Then It should not be valid')
 def validate_user(step):
     assert Users.exists(username=world.user.username)
+
+#######
+
+@step(r'I create a new user with personal information')
+def newUser(step):
+    user = Users(email = "foo@bar.com", username="FooBar", password = "1234",
+                 name = "Someone", surname = "Somebody", birthdate = "1991-12-12",
+                 gender = "H", country = "Spain")
+    world.user = user
+    world.user.saveUser()
     
+# DateFields:
+# If no input_formats argument is provided, the default input formats are:
+
+# '%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y', # '2006-10-25', '10/25/2006', '10/25/06'
+# '%b %d %Y', '%b %d, %Y',            # 'Oct 25 2006', 'Oct 25, 2006'
+# '%d %b %Y', '%d %b, %Y',            # '25 Oct 2006', '25 Oct, 2006'
+# '%B %d %Y', '%B %d, %Y',            # 'October 25 2006', 'October 25, 2006'
+# '%d %B %Y', '%d %B, %Y',            # '25 October 2006', '25 October, 2006'
+
+@step(r'And I retrieve it from the database')
+def getUser(step):
+    queryset = Users.objects.filter(email = "foo@bar.com")
+    if (queryset):
+        world.user = queryset.get()
+
+@step(r'Then It should have a name')
+def hasName(step):
+    assert world.user.name == 'Someone'
+    
+@step(r'And It should have a surname')
+def hasSurname(step):
+    assert world.user.surname == 'Somebody'
+    
+@step(r'And It should have a birthdate')
+def hasBirthdate(step):
+    assert world.user.birthdate == dateField.new('1991-12-12')
+    
+@step(r'And It should have a gender')
+def hasGender(step):
+    assert world.user.gender == 'H'
+    
+@step(r'And It should have a country')
+def hasCountry(step):
+    assert world.user.country == 'Spain'
+    
+###########
+
 @after.all
 def cleanDatabase(arg):
     q = Users.objects.filter(username=world.user.username)
