@@ -1,0 +1,12 @@
+Feature: Micropost
+
+    Scenario: Writing a Micropost
+        Given I have a written micropost
+        Then the text length is correct
+    	Then It should be created correctly
+        
+        
+    Scenario: Publishing a Micropost
+        When I published a micropost the written text will be the same as the published text
+        And the user that published a micropost will be the owner
+        
