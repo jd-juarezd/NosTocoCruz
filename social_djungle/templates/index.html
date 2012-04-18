@@ -10,7 +10,7 @@
 		<section class='login'>
 		<h1> ¡Bienvenido! Inicio de Sesión </h1>
 			<p><img src='media/logo.png' alt='Logo Social Djungle'></p>
-			<form id='login'>
+			<form id='login'> {% csrf_token %}
 				<p><input type='text' value='Nombre de usuario' name='username'/></p>
 				<p><input type='password' value='Contraseña' name='password'/></p>
 				<p>	
@@ -20,14 +20,15 @@
 			</form>
 		</section>
 		<section class='register'>
+			{% if nuevoUsuario %} {{nuevoUsuario}} {% endif %}
+			{% if erroresNuevoUsuario %} {{ erroresNuevoUsuario }} {% endif %}
 		<h1> ¿Nuevo usuario? ¡Regístrate! </h1>	
-		<form id='registro'>	
-			<p><input type='text' value='Nombre' name='nombre' /></p>
-			<p><input type='text' value='Apellidos' name='apellidos' /></p>
+		<form id='registro' action="/user/newuser" method="post">	{% csrf_token %}
+			<p><input type='text' value='Nombre de Usuario' name='username' /></p>
 			<p><input type='text' value='Email' name='email' /></p>
 			<p><input type='password' value='Contraseña' name='password_register' /></p>
 			<p><input type='password' value='Confirmar Contraseña' name='password_register_checker' /></p>
-			<p><input type='button' value='Crear Cuenta'/></p>
+			<p><input type='submit' value='Crear Cuenta'/></p>
 		</form>
 		</section>
 		<footer>

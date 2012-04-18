@@ -3,10 +3,11 @@ from lxml import html
 from django.test.client import Client
 from nose.tools import assert_equals
 from User.models import Users,ValidationError
+import datetime
 
 @step(r'I create a sample user')
 def define_user(step):
-    u = Users(email = "foo@bar.com", username="FooBar", password = "1234")
+    u = Users(email = "foo@bar.com", username="FooBar", password = "1234", timestamp=datetime.datetime.now())
     world.user = u
     assert isinstance(u,Users)
 
