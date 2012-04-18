@@ -1,7 +1,7 @@
 Feature: Micropost
 
     Scenario: Writing a Micropost
-        Given I have a written micropost
+        Given I create a sample micropost
         Then the text length is correct
     	Then It should be created correctly
         
