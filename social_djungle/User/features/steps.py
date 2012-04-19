@@ -51,6 +51,33 @@ def create_user_again(step):
 @step(r'Then It should not be valid')
 def validate_user(step):
     assert Users.exists(username=world.user.username)
+#######
+
+@step(r'I try to log in with the user')
+def try_to_log_in(step):
+    world.browser = Client()
+    world.response = world.browser.post('/user/login',
+                                        {'username' : world.user.username,
+                                         'password' : world.user.password })
+        
+@step(r'The user is authenticated')
+def test_if_authenticated(step):
+    assert Users.is_authenticated(world.browser.session)
+    
+@step(r'The cookie should have a "(.*)" field')
+def test_cookies_content(step, field):
+    sessionInfo = world.browser.session
+    assert sessionInfo.get(field, False)
+    
+@step(r'Finally I log out')
+def test_if_logout_works(step):
+    world.response = world.browser.get('/user/logout')
+    assert not Users.is_authenticated(world.browser.session)
+
+@step(r'The cookie should not have a "(.*)" field')
+def test_cookies_should_not_have(step, field):
+    sessionInfo = world.browser.session
+    assert not sessionInfo.get(field, False)
 
 #######
 
