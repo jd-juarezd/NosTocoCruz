@@ -17,6 +17,17 @@ Feature: Validating User Model
 		And saved
 		If I try to create it again
 		Then It should not be valid
+		
+	Scenario: User session is correctly set
+		I try to log in with the user
+		The user is authenticated
+		The cookie should have a "session_id" field
+		The cookie should have a "expire_date" field
+		The cookie should have a "id" field
+		Finally I log out
+		The cookie should not have a "session_id" field
+		The cookie should not have a "expire_date" field
+		The cookie should not have a "id" field
 	
 	Scenario: User attributes are correctly stored
 		When I create a new user with personal information
