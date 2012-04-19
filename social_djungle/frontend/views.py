@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render_to_response
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.template import RequestContext
 from django.template.loader import get_template
 
@@ -16,7 +16,10 @@ def home(request):
     return render_to_response('home.html')
 
 def getURL(request, path):
-    t = get_template('%s.html' % str(path))
+    try:
+        t = get_template('%s.html' % str(path))
+    except:
+        raise Http404
     c = RequestContext(request, {})
     return HttpResponse(t.render(c))
     
