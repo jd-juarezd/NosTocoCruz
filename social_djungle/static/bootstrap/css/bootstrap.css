@@ -3989,11 +3989,11 @@ a.thumbnail:hover {
 .invisible {
   visibility: hidden;
 }
-/* +++ */
+/* home.html */
 .bgimage {
     background-attachment: fixed;
     background-clip: border-box;
-    background-color: #000000;
+    background-color: #222222;
     background-image:url("../../img/fondo1.jpg");
     background-origin: padding-box;
     background-position: center center;
@@ -4015,3 +4015,73 @@ a.thumbnail:hover {
 	font-size: 125%;
 	color: #FFF;
 }
+/* index.html */
+.bggradient {
+	height: 300px;
+	background: #222222; /* Old browsers */
+	background: -moz-linear-gradient(left,  #222222 0%, #45484d 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#222222), color-stop(100%,#45484d)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left,  #222222 0%,#45484d 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left,  #222222 0%,#45484d 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left,  #222222 0%,#45484d 100%); /* IE10+ */
+	background: linear-gradient(left,  #222222 0%,#45484d 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#45484d',GradientType=1 ); /* IE6-9 */
+}
+.indexBody {
+	width: 700px;
+	padding: 40px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  background-color: #eeeeee;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+.indexBody h1 {
+  margin-bottom: 15px;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1;
+  color: inherit;
+}
+.spanMarginLeft {
+	margin-left: 25px;
+}
+.spanMarginRight {
+	margin-right: 25px;
+}
+.logoBig {
+	height: 300px;
+	width: 300px;
+	margin-left: 20px;
+	margin-bottom: 15px;
+}
+.indexFooter li {
+	list-style: none;
+	float: left;
+	margin: 5px 25px 0 0;
+}
+.indexFooter  li > a:hover {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #0088cc;
+}
+.footerBorder  {
+	border-top: 1px solid #999;
+}
+.welcome {
+	font-family: verdana, arial, helvetica, sans-serif;
+	text-align: center;
+	margin-left: -20px;
+	width: 740px;
+	padding: 10px 20px;
+	background-color: #eeeeee;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
