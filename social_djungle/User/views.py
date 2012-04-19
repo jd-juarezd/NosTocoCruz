@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from User.models import Users,ValidationError
 from django.shortcuts import render_to_response, render
+from django.http import HttpResponseRedirect
 import hashlib
 import datetime
 
@@ -19,6 +20,6 @@ def newUser(request):
     except ValidationError as vError:
         context = {'erroresNuevoUsuario': 'Error de validación'}
         return render(request, 'index.html', context)
-    message = 'El usuario ha sido creado con éxito.'
-    user.saveUser()
-    return render(request, 'index.html', {'nuevoUsuario': message})
+    # User has been created
+    user.saveUser() # and saved to database
+    return HttpResponseRedirect('/')
