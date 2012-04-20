@@ -1,0 +1,199 @@
+/* CSS de la pagina socialDjungle */
+html {
+	height: 100%;
+}	
+
+/* Tipografías legibles; extraídas de http://www.thenoodleincident.com/tutorials/typography/ */
+
+body, h1, h2, h3, h4, h5, h6,ol, ul, li, p {
+	font-family: verdana, arial, helvetica, sans-serif;
+	color: #000;
+	}
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #5ece61;
+	/* background-image: url(http://www.thenoodleincident.com/img/n4_upgrade.gif);
+	background-repeat: no-repeat;
+	background-position: top left; */
+	}
+		
+h1 {
+	font-size: 150%;
+	font-weight: normal;
+	}
+
+img {
+	border: 0;
+	}
+ol, ul, li {/*
+	list-style: none;*/
+	font-size: 80%;
+	line-height: 120%;
+	}
+p {
+	font-size: 80%;
+	line-height: 120%;
+	}
+
+strong, b {
+	font-weight: bold;
+	}
+	
+/* Fin de definición de tipografía */
+
+.index {
+	border: 2px solid #000;
+	padding: 5px;
+	margin: 20px auto;
+	width: 960px;
+	background-color: #94e444;
+	opacity: 0.9;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.login {
+	float: left;
+	width: 350px;
+	margin: 0;
+	padding: 5px 40px;
+}
+
+	.login img {
+		height: 150px;
+		width: 300px;
+	}
+
+
+.register {
+	float: right;
+	width: 350px;
+	margin: 0;
+	padding: 5px 40px;
+}
+
+.register input, .login input {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+nav {
+	margin: 0 auto;
+	padding: 5px;
+	height: 50px;
+	font-size: 150%;
+	font-weight: bold;
+	width: 960px;
+	background-color: #94e444;
+	border-radius: 5px;
+}
+	nav ul {
+		width: 550px;
+		margin: 1em auto;
+	}
+	nav li {
+		float: left;
+		list-style: none;
+		padding-right: 1.5em;
+	}
+	nav input {
+		border: 1px solid #000;
+		margin: 0 4px 0 0;
+	}
+	nav img {
+		margin: 0 4px 0 0;
+		width: 66px;
+		height: 30px;
+	}
+	nav a:link {
+		color: #000;
+		text-decoration: none;
+	}
+	nav a:active {
+		color: #000;
+		text-decoration: none;
+	}
+	nav a:hover {
+		color: #FFF;
+		text-decoration: underline;
+	}
+	nav a:visited {
+		color: #000;
+		text-decoration: none;	
+	}
+
+.wrapper {
+	padding: 5px;
+	margin: 20px auto;
+	width: 960px;
+	background-color: #94e444;
+	opacity: 0.9;
+	border-radius: 5px;
+	overflow: hidden;
+	
+}
+
+.timeline {
+	float: left;
+	margin-left: 50px;
+	padding: 5px 5px 5px 10px;
+	height: 500px;
+	border: 2px solid #000;
+	border-radius: 5px;
+	width: 720px;
+}
+
+aside {
+	float: left;
+	margin-left: 5px;
+	width: 160px;
+}
+
+aside h1 {
+	border-bottom: 2px solid #000;
+}
+
+.chat {
+	float: left;
+	margin-left: 5px;
+	width: 150px;
+}
+
+.events {
+	clear: left;
+	float: left;
+	margin-left: 5px;
+	width: 150px;
+}
+
+footer {
+	margin: 1em auto;
+	padding: 0.5em;
+	width: 30%;
+	clear: both;
+	font-size: 120%;
+}
+
+	footer  li {
+		float: left;
+		list-style: none;
+		padding-right: 1.5em;
+	}
+	footer a:link {
+		color: #00A;
+		text-decoration: underline;
+	}
+	
+	footer  a:active {
+		color: #00A;
+		text-decoration: underline;
+	}
+	
+	footer  a:visited {
+		color: #00A;
+		text-decoration: underline;
+	}
+
+
+

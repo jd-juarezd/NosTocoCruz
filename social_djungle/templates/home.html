@@ -1,40 +1,65 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-		<link media="screen" type="text/css" href="{{ STATIC_URL }}css/main.css" rel="stylesheet">
-		<title>Social Djungle - Home</title>
-	</head>
-	<body>
-		<nav>
-			<ul>
-				<li><img src='logomini.png' alt='Logo Djungle'></li>
-				<li><a href=#>Home</a></li>
-				<li><a href=#>Perfil</a></li>
-				<li><input type='text' value='Buscar'></li>
-				<li><a href=#>Salir</a></li>
-			</ul>
-		</nav>
-		<div class='wrapper'>
-			<aside>
-				<section class='chat'>
-					<h1>Chat</h1>
-				</section>
-				<section class='events'>
-					<h1>Eventos</h1>
-				</section>
-			</aside>
-			<section class='timeline'>
-				<h1>Novedades</h1>
-			</section>
-		</div>
-		<footer>
-			<ul>
-				<li><a href=#> Ayuda </a></li>
-				<li><a href=#> FAQ </a></li>
-				<li><a href=#> Blog </a></li>
-				<li><a href=#> Acerca de </a></li>
-			</ul>
-		</footer>
-	</body>
+<!DOCTYPE html>
+<html lang='es'>
+	
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<link type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
+	<title>Social Djungle - Home</title>	
+</head>
+	
+	
+<body class="bgimage">
+
+<div class="container">
+	<!-- TOP FIXED NAVBAR-->
+	<!-- To edit bar background colors: goto lines 2782 to 2800 @ bootstrap.css -->
+	<div class="navbar navbar-fixed-top">  
+		<div class="navbar-inner">  
+			<div class="container">  
+				<ul class="nav">  
+					<li class="brand">Social Djungle</li>  
+					<li class="active"><a href="#">Home</a></li>  
+					<li><a href="profile.html">Perfil</a></li>  
+					<li><a href="#">Fotos</a></li>  
+				</ul>  
+				<form class="navbar-search pull-right">  
+					<input type="text" class="input-medium search-query" placeholder='Buscar...'>  
+					<button class="btn-small"><i class="icon-search"></i></button>
+				</form>  
+			</div>  
+		</div>  
+	</div>   
+
+	<!-- DOC BODY UNDER NAVBAR-->
+<div class="hero-unit">
+  <h1>Bienvenidos a Social Djungle</h1>
+  <p>
+    Texto principal de blablabla....
+  </p>
+  <p><a class="btn btn-primary btn-large">Más información</a></p>
+</div>
+
+
+	<!-- DOC FOOTER-->
+	<div class="navbar navbar-fixed-bottom">
+		<div class="navbar-inner">  
+			<div class="container">  
+					<ul class="nav">
+						<li> <p class="footertext">Creado con <a href=#><strong>BootStrap</strong></a></p></li>
+						<li> <p class="footertext">Sígue el proyecto en <a href=#><strong>GitHub</strong></a> </p></li>
+					</ul>
+					<ul class="nav pull-right">
+						<li><a href=#>Acerca de</a></li>
+						<li><a href=#>FAQ</a></li>
+						<li><a href=#>Contacto</a></li>
+					</ul>
+			</div>  
+		</div>  
+	</div>
+
+
+</div>
+
+</body>
+
 </html>
