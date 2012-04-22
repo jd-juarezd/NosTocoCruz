@@ -19,7 +19,8 @@
 			<div class='span4 spanMarginRight'>
 				<h1>¡Bienvenido! Inicio de Sesión</h1>
 				<img class="logoBig" src="{{ STATIC_URL }}img/logo.png" alt='Logo Social Djungle'>
-				<form id='login' class="form-horizontal">  
+				{% if errorLogin %} {{ errorLogin }} {% endif %}
+				<form id='login' class="form-horizontal" action="/user/login" method="post">  {% csrf_token %}
 					<fieldset>
 						<div class="control-group">
 							<label class="control-label" for="username">Nombre de usuario</label>
@@ -51,10 +52,16 @@
 			<!-- Columna de Registro -->
 			<div class='span4 spanMargin'>
 				<h1>¿Nuevo usuario? ¡Regístrate!</h1>
-				<form id='registro' class="form-horizontal">  
+				<form id='registro' class="form-horizontal" method="post" action="/user/newuser">  {% csrf_token %}
 					<fieldset>
 						<div class="control-group">
-							<label class="control-label" for="username">Nombre</label>
+							<label class="control-label" for="username">Nombre de usuario</label>
+							<div class="controls">
+								<input type="text" class="input-medium" name="username">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="nombre">Nombre</label>
 							<div class="controls">
 								<input type="text" class="input-medium" name="nombre">
 							</div>

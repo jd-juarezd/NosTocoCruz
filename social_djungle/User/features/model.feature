@@ -21,12 +21,10 @@ Feature: Validating User Model
 	Scenario: User session is correctly set
 		I try to log in with the user
 		The user is authenticated
-		The cookie should have a "session_id" field
-		The cookie should have a "expire_date" field
+		The cookie should have a "user_session" field
 		The cookie should have a "id" field
 		Finally I log out
-		The cookie should not have a "session_id" field
-		The cookie should not have a "expire_date" field
+		The cookie should not have a "user_session" field
 		The cookie should not have a "id" field
 	
 	Scenario: User attributes are correctly stored
