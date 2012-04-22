@@ -12,14 +12,14 @@ def index(request):
         c = RequestContext(request, {})
         return HttpResponse(t.render(c))
     else:
-        return HttpResponseRedirect('/home')
-
+        return HttpResponseRedirect('/user/home')
+"""
 def profile(request):
     return render_to_response('profile.html')
 
 def home(request):
     return render_to_response('home.html')
-
+"""
 def getURL(request, path):
     try:
         t = get_template('%s.html' % str(path))
