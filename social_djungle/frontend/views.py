@@ -12,8 +12,8 @@ def index(request):
         t = get_template('index.html')
         context = {}
         if (request.session.get('regError', False)):
+            context.update({ 'regError': request.session['regError'] })
             del request.session['regError']
-            context.update({ 'regError': 'Los datos de entrada no son válidos.' })
         if (request.session.get('newUser', False)):
             del request.session['newUser']
             context.update({ 'newUser': 'El usuario ha sido creado satisfactoriamente.'})

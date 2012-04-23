@@ -28,12 +28,16 @@ def newUser(request):
         Users.validateInput(user)
         user.password = encPassword
     except ValidationError as vError:
-        request.session['regError'] = True
+        request.session['regError'] = 'Los datos de entrada no son válidos'
         return HttpResponseRedirect('/')
     else:
         # User has been created
-        user.saveUser() # and saved to database
-        request.session['newUser'] = True
+        try:
+            user.saveUser() # and saved to database
+        except:
+            request.session['regError'] = 'El usuario ya existe en la base de datos.'
+        else:
+            request.session['newUser'] = True
         return HttpResponseRedirect('/')
 
 @csrf_protect
