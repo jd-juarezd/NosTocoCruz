@@ -34,6 +34,5 @@ Feature: Validating User Model
 		And It should have a surname
 		And It should have a birthdate
 		And It should have a gender
-		And It should have a country
 		
 		

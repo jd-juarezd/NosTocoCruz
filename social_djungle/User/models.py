@@ -13,13 +13,18 @@ class CookieError(Exception):
         self.value = value
 
 class Users(models.Model):
-    username = models.CharField(max_length=50)
+    username = models.CharField(max_length = 50)
     email = models.EmailField()
-    password = models.CharField(max_length=40) # SHA1 hash is 40 characters long
+    password = models.CharField(max_length = 40) # SHA1 hash is 40 characters long
     timestamp = models.DateTimeField('Account created')
+    name = models.CharField(max_length = 30)
+    surname = models.CharField(max_length = 40)
+    gender = models.CharField(max_length = 10)
+    birthdate = models.CharField(max_length = 10)
+    
     
     def __unicode__(self):
-        return self.username
+        return "%s %s: %s" % (self.name, self.surname, self.username)
     
     @classmethod
     def exists(cls, username):
@@ -61,9 +66,10 @@ class Users(models.Model):
     def is_authenticated(cls, session_key, cookie):
         try:
             dbCookie = Session.objects.get(session_key = session_key).get_decoded()
-            if ((dbCookie['id'])
-                and (dbCookie['id'] == cookie['id'])):
-                return True                
+            assert dbCookie['id'] == cookie['id']
+            assert dbCookie['user_session'] == cookie['user_session']
+            assert dbCookie['id'] == cookie['id']
+            return True
         except:
             return False
 
