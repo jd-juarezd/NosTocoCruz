@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.template import RequestContext
@@ -9,7 +10,14 @@ def index(request):
     if (not request.session.get('id', False)):
         request.session.set_test_cookie()
         t = get_template('index.html')
-        c = RequestContext(request, {})
+        context = {}
+        if (request.session.get('regError', False)):
+            del request.session['regError']
+            context.update({ 'regError': 'Los datos de entrada no son válidos.' })
+        if (request.session.get('newUser', False)):
+            del request.session['newUser']
+            context.update({ 'newUser': 'El usuario ha sido creado satisfactoriamente.'})
+        c = RequestContext(request, context)
         return HttpResponse(t.render(c))
     else:
         return HttpResponseRedirect('/user/home')
