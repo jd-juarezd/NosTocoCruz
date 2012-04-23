@@ -4028,10 +4028,32 @@ a.thumbnail:hover {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#45484d',GradientType=1 ); /* IE6-9 */
 }
 .indexBody {
-	width: 700px;
-	padding: 40px;
+  width: 700px;
+  padding: 40px;
   margin-top: 10px;
   margin-bottom: 30px;
+  background-color: #eeeeee;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+.indexLogin {
+  width: 300px;
+  padding: 20px 50px 0px 20px;
+  margin: 0px 50px 5px 0px;
+  background-color: #eeeeee;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+.indexMonkey {
+  width: 300px;
+  margin: 70px 0px 0px 90px;
+}
+.indexSignup {
+  width: 300px;
+  padding: 20px 80px 7px 10px;
+  margin: 10px 80px 30px 80px;
   background-color: #eeeeee;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -4051,15 +4073,19 @@ a.thumbnail:hover {
 	margin-right: 25px;
 }
 .logoBig {
-	height: 300px;
+	height: 250px;
 	width: 300px;
-	margin-left: 20px;
-	margin-bottom: 15px;
+	margin: 0px 0px 0px 30px;
+}
+.logoSmall {
+	height: 100px;
+	width: 50px;
+	margin: 0px 0px 10px 0px;
 }
 .indexFooter li {
 	list-style: none;
 	float: left;
-	margin: 5px 25px 0 0;
+	margin: 5px 25px 0 100px;
 }
 .indexFooter  li > a:hover {
   color: #ffffff;
@@ -4068,6 +4094,7 @@ a.thumbnail:hover {
 }
 .footerBorder  {
 	border-top: 1px solid #999;
+	margin-left: 160px;
 }
 .welcome {
 	font-family: verdana, arial, helvetica, sans-serif;
@@ -4080,8 +4107,8 @@ a.thumbnail:hover {
   -moz-border-radius: 6px;
   border-radius: 6px;
 }
+
 .center {
 	margin-left: auto;
 	margin-right: auto;
 }
-
