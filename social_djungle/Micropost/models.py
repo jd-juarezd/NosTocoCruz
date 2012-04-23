@@ -12,7 +12,7 @@ class Microposts(models.Model):
     date_post = models.DateTimeField(auto_now=True, auto_now_add=True)
     
     def __unicode__(self):
-        return self.id_post
+        return self.text
 
     @classmethod
     def validateLength(cls, text):

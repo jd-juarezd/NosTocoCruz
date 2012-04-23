@@ -90,11 +90,11 @@ def test_cookies_should_not_have(step, field):
 
 @step(r'I create a new user with personal information')
 def newUser(step):
-    user = Users(email = "foo@bar.com", username="FooBar", password = "1234",
+    user = Users(email = "foo@bar2.com", username="FooBar2", password = "1234",
                  name = "Someone", surname = "Somebody", birthdate = "1991-12-12",
-                 gender = "H", country = "Spain")
-    world.user = user
-    world.user.saveUser()
+                 gender = "Hombre", timestamp = datetime.datetime.now())
+    world.user2 = user
+    world.user2.saveUser()
     
 # DateFields:
 # If no input_formats argument is provided, the default input formats are:
@@ -107,36 +107,37 @@ def newUser(step):
 
 @step(r'And I retrieve it from the database')
 def getUser(step):
-    queryset = Users.objects.filter(email = "foo@bar.com")
+    queryset = Users.objects.filter(email = "foo@bar2.com")
     if (queryset):
-        world.user = queryset.get()
+        world.user2 = queryset.get()
 
 @step(r'Then It should have a name')
 def hasName(step):
-    assert world.user.name == 'Someone'
+    assert world.user2.name == 'Someone'
     
 @step(r'And It should have a surname')
 def hasSurname(step):
-    assert world.user.surname == 'Somebody'
+    assert world.user2.surname == 'Somebody'
     
 @step(r'And It should have a birthdate')
 def hasBirthdate(step):
-    assert world.user.birthdate == dateField.new('1991-12-12')
+    assert str(world.user2.birthdate) == '1991-12-12'
     
 @step(r'And It should have a gender')
 def hasGender(step):
-    assert world.user.gender == 'H'
-    
-@step(r'And It should have a country')
-def hasCountry(step):
-    assert world.user.country == 'Spain'
+    assert world.user2.gender == 'Hombre'
     
 ###########
 
 @after.all
 def cleanDatabase(arg):
-    q = Users.objects.filter(username=world.user.username)
-    if q:
-        u = q.get()
-        u.delete()
-    
+    try:
+        u1 = Users.objects.get(username = world.user.username)
+        u1.delete()
+    except:
+        pass
+    try:
+        u2 = Users.objects.get(username = world.user2.username)
+        u2.delete()
+    except:
+        pass
