@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<link media="screen" type="text/css" href="{{ STATIC_URL }}css/main.css" rel="stylesheet">
+		<title>Bienvenido a Social Djungle</title>
+	</head>
+	<body>
+	<div class='index'>
+		<section class='login'>
+		<h1> ¡Bienvenido! Inicio de Sesión </h1>
+			<p><img src='media/logo.png' alt='Logo Social Djungle'></p>
+			<form id='login'>
+				<p><input type='text' value='Nombre de usuario' name='username'/></p>
+				<p><input type='password' value='Contraseña' name='password'/></p>
+				<p>	
+					<label><input type='checkbox' name='remember'/> No cerrar sesión </label> 
+					<a href=#> ¿Olvidaste la contraseña? </a>	
+				</p>
+			</form>
+		</section>
+		<section class='register'>
+		<h1> ¿Nuevo usuario? ¡Regístrate! </h1>	
+		<form id='registro'>	
+			<p><input type='text' value='Nombre' name='nombre' /></p>
+			<p><input type='text' value='Apellidos' name='apellidos' /></p>
+			<p><input type='text' value='Email' name='email' /></p>
+			<p><input type='password' value='Contraseña' name='password_register' /></p>
+			<p><input type='password' value='Confirmar Contraseña' name='password_register_checker' /></p>
+			<p><input type='button' value='Crear Cuenta'/></p>
+		</form>
+		</section>
+		<footer>
+			<ul>
+				<li><a href=#> Ayuda </a></li>
+				<li><a href=#> FAQ </a></li>
+				<li><a href=#> Blog </a></li>
+				<li><a href=#> Acerca de </a></li>
+			</ul>
+		</footer>
+	</div>
+	</body>
+</html>

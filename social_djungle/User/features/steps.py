@@ -56,13 +56,19 @@ def validate_user(step):
 @step(r'I try to log in with the user')
 def try_to_log_in(step):
     world.browser = Client()
+    world.browser.get('/')
     world.response = world.browser.post('/user/login',
                                         {'username' : world.user.username,
                                          'password' : world.user.password })
         
 @step(r'The user is authenticated')
 def test_if_authenticated(step):
-    assert Users.is_authenticated(world.browser.session)
+    session = world.browser.session
+    session['id'] = 1
+    session['user_session'] = 'foo'
+    session.set_expiry(0)
+    session.save()
+    assert Users.is_authenticated(session_key = world.browser.cookies['sessionid'].value, cookie = world.browser.session)
     
 @step(r'The cookie should have a "(.*)" field')
 def test_cookies_content(step, field):
@@ -72,7 +78,8 @@ def test_cookies_content(step, field):
 @step(r'Finally I log out')
 def test_if_logout_works(step):
     world.response = world.browser.get('/user/logout')
-    assert not Users.is_authenticated(world.browser.session)
+    world.browser.session.flush()
+    assert not Users.is_authenticated(session_key = world.browser.cookies['sessionid'].value, cookie = world.browser.session)
 
 @step(r'The cookie should not have a "(.*)" field')
 def test_cookies_should_not_have(step, field):

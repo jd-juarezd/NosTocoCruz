@@ -1,22 +1,30 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.contrib.sessions.models import Session
 import re
+import hashlib
+import datetime
 
 class ValidationError(Exception):
     def __init__(self, value):
         self.value = value
-class PasswordError(ValidationError):
+class CookieError(Exception):
     def __init__(self, value):
         self.value = value
 
 class Users(models.Model):
-    username = models.CharField(max_length=50)
+    username = models.CharField(max_length = 50)
     email = models.EmailField()
-    password = models.CharField(max_length=40) # SHA1 hash is 40 characters long
+    password = models.CharField(max_length = 40) # SHA1 hash is 40 characters long
     timestamp = models.DateTimeField('Account created')
+    name = models.CharField(max_length = 30)
+    surname = models.CharField(max_length = 40)
+    gender = models.CharField(max_length = 10)
+    birthdate = models.CharField(max_length = 10)
+    
     
     def __unicode__(self):
-        return self.username
+        return "%s %s: %s" % (self.name, self.surname, self.username)
     
     @classmethod
     def exists(cls, username):
@@ -52,10 +60,31 @@ class Users(models.Model):
         if (not Users.validatePassword(user.password)):
             raise ValidationError('La contraseña no es válida. Debe ser de entre 4 y 60 caracteres.')
         if (not Users.validateUsername(user.username)):
-            raise ValidationError('El nombre de usuario no es válido.')        
+            raise ValidationError('El nombre de usuario no es válido.')   
+        
+    @classmethod
+    def is_authenticated(cls, session_key, cookie):
+        try:
+            dbCookie = Session.objects.get(session_key = session_key).get_decoded()
+            assert dbCookie['id'] == cookie['id']
+            assert dbCookie['user_session'] == cookie['user_session']
+            assert dbCookie['id'] == cookie['id']
+            return True
+        except:
+            return False
 
     def saveUser(self):
         if (not Users.objects.filter(username=self.username)):
             self.save()
         else:
             raise ValidationError('Ya existe un usuario con ese nombre.')
+    
+    def matchPassword(self,password):
+        encPassw = hashlib.sha1('%s -- %s' % (password, str(self.timestamp))).hexdigest()
+        return self.password == encPassw
+    
+    def sessionID(self):
+        id = hashlib.sha1('%s -- %s -- %s' % (self.id,
+                                 self.timestamp,
+                                 str(datetime.datetime.now()))).hexdigest()
+        return id
