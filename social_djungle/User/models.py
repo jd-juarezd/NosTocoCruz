@@ -61,6 +61,7 @@ class Users(models.Model):
             raise ValidationError('La contraseña no es válida. Debe ser de entre 4 y 60 caracteres.')
         if (not Users.validateUsername(user.username)):
             raise ValidationError('El nombre de usuario no es válido.')   
+        return True
         
     @classmethod
     def is_authenticated(cls, session_key, cookie):

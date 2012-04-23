@@ -17,7 +17,7 @@ def newUser(request):
             encPassword = hashlib.sha1('%s -- %s' % (request.POST['password_register'], str(time))).hexdigest()
             user = Users(username = request.POST['username'],
                          timestamp = time,
-                         password = encPassword,
+                         password = request.POST['password_register'],
                          email = request.POST['email'],
                          name = request.POST['nombre'],
                          surname = request.POST['apellidos'],
@@ -26,12 +26,15 @@ def newUser(request):
         else:
                 raise ValidationError('Las contraseñas no coinciden')
         Users.validateInput(user)
+        user.password = encPassword
     except ValidationError as vError:
-        context = {'erroresNuevoUsuario': 'Error de validación'}
-        return render(request, 'index.html', context)
-    # User has been created
-    user.saveUser() # and saved to database
-    return HttpResponseRedirect('/')
+        request.session['regError'] = True
+        return HttpResponseRedirect('/')
+    else:
+        # User has been created
+        user.saveUser() # and saved to database
+        request.session['newUser'] = True
+        return HttpResponseRedirect('/')
 
 @csrf_protect
 def login(request):
