@@ -4016,49 +4016,25 @@ a.thumbnail:hover {
 	color: #FFF;
 }
 /* index.html */
-.bggradient {
-	height: 300px;
-	background: #222222; /* Old browsers */
-	background: -moz-linear-gradient(left,  #222222 0%, #45484d 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#222222), color-stop(100%,#45484d)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(left,  #222222 0%,#45484d 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(left,  #222222 0%,#45484d 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(left,  #222222 0%,#45484d 100%); /* IE10+ */
-	background: linear-gradient(left,  #222222 0%,#45484d 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#45484d',GradientType=1 ); /* IE6-9 */
+.bgimage {
+    background-attachment: fixed;
+    background-clip: border-box;
+    background-color: #7d3f02;
+    background-image:url("../../img/fondo2.png");
+    background-origin: padding-box;
+    background-position: center center;
+    background-repeat: no-repeat;
+		background-size: 800px 600px;
+    z-index: 0;
 }
-.indexLogin {
-  width: 300px;
-  padding: 20px 50px 0px 20px;
-  margin: 0px 50px 5px 0px;
-  background-color: #eeeeee;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-}
-.indexMonkey {
-  width: 300px;
-  margin: 70px 0px 0px 90px;
-}
-.indexSignup {
-  width: 300px;
-  padding: 20px 80px 7px 10px;
-  margin: 10px 80px 30px 80px;
-  background-color: #eeeeee;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-}
-.spanMarginLeft {
-	margin-left: 25px;
-}
-.spanMarginRight {
-	margin-right: 25px;
-}
+
 .logoBig {
-	height: 250px;
-	width: 300px;
-	margin: 0px 0px 0px 30px;
+	margin-top: -18px;
+	margin-left: auto;
+	margin-right: auto;
+	height: 220px;
+	width: 250px;
+	margin-bottom: -60px;
 }
 .logoSmall {
 	height: 100px;
@@ -4075,26 +4051,80 @@ a.thumbnail:hover {
   text-decoration: none;
   background-color: #0088cc;
 }
-.footerBorder  {
+.indexFooter {
 	border-top: 1px solid #999;
-	margin-left: 160px;
+	margin-top: 20px;
+	width: 740px;
+	margin-left: auto;
+	margin-right: auto;
 }
 .welcome {
 	font-family: verdana, arial, helvetica, sans-serif;
-	text-align: center;
 	margin-left: -20px;
 	width: 740px;
-	padding: 10px 20px;
+	padding: 20px 20px;
 	background-color: #eeeeee;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
+  opacity: 0.9;
+}
+.welcome h1{
+	text-align:center;
 }
 .hero-unit-margin {
 	margin-top: 75px;
 }
-
 .center {
 	margin-left: auto;
 	margin-right: auto;
+}
+.login-btn {
+	margin-top: 5px;
+	padding: 2px 6px;
+  font-size: 11px;
+  line-height: 14px;
+}
+.navbar-input {
+	width: 120px;
+	padding: 2px 7px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 1;
+  color: #ffffff;
+  background-color: #626262;
+  border: 1px solid #151515;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 0px rgba(255, 255, 255, 0.15);
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 0px rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 0px rgba(255, 255, 255, 0.15);
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.navbar-login {
+	margin-top: 3px;
+  margin-bottom: 0;
+  *zoom: 1;
+}
+.navbar-login:before,
+.navbar-login:after {
+  display: table;
+  content: "";
+}
+.navbar-login:after {
+  clear: both;
+}
+.navbar-login input,
+.navbar-login select,
+.navbar-login .radio,
+.navbar-login .checkbox {
+  margin-top: 5px;
+}
+.navbar-login input,
+.navbar-login select {
+  display: inline-block;
+  margin-bottom: 0px;
 }
