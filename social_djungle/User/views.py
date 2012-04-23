@@ -18,7 +18,11 @@ def newUser(request):
             user = Users(username = request.POST['username'],
                          timestamp = time,
                          password = encPassword,
-                         email = request.POST['email'])
+                         email = request.POST['email'],
+                         name = request.POST['nombre'],
+                         surname = request.POST['apellidos'],
+                         gender = request.POST['gender'],
+                         birthdate = request.POST['birthdate'])
         else:
                 raise ValidationError('Las contraseñas no coinciden')
         Users.validateInput(user)
@@ -76,8 +80,8 @@ def home(request):
         #User maybe has logged in
         try:
             dbCookie = Session.objects.get(session_key = request.session.session_key).get_decoded()
-            assert dbCookie['user_session'] == request.session['user_session']
-            assert dbCookie['id'] == request.session['id']
+            if (not Users.is_authenticated(session_key = request.session.session_key, cookie = request.session)):
+                raise CookieError
         except:
             # Bad cookie
             request.session.flush()
@@ -86,8 +90,31 @@ def home(request):
             user = Users.objects.get(id = dbCookie['id'])
             t = get_template('home.html')
             # Here we load all user information with context
-            c = RequestContext(request, { 'UserName': user.username })
+            c = RequestContext(request, { 'UserName': user.username,
+                                          'UserID': user.id })
             return HttpResponse(t.render(c))
 
 def profile(request, id):
-    pass
+    try:
+        user = Users.objects.get(id = id)
+        loggedUser = Users.objects.get(id = request.session['id'])
+        if (not Users.is_authenticated(session_key = request.session.session_key, cookie = request.session)):
+                raise CookieError
+    except CookieError:
+        # User has not logged in
+        request.session.flush()
+        return HttpResponseRedirect('/')
+    except:
+        # Likely, user with id = id has not been found
+        return HttpResponseRedirect('/user/home')
+    else:
+        # Rendering profile page using id
+        t = get_template('profile.html')
+        c = RequestContext(request, { 'ProfileUserName': user.username,
+                                      'ProfileName': user.name,
+                                      'ProfileSurname': user.surname,
+                                      'ProfileGender': user.gender,
+                                      'ProfileBirthdate': user.birthdate,
+                                      'UserID': loggedUser.id })
+        return HttpResponse(t.render(c))
+        
