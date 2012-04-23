@@ -4027,16 +4027,6 @@ a.thumbnail:hover {
 	background: linear-gradient(left,  #222222 0%,#45484d 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#45484d',GradientType=1 ); /* IE6-9 */
 }
-.indexBody {
-  width: 700px;
-  padding: 40px;
-  margin-top: 10px;
-  margin-bottom: 30px;
-  background-color: #eeeeee;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-}
 .indexLogin {
   width: 300px;
   padding: 20px 50px 0px 20px;
@@ -4058,13 +4048,6 @@ a.thumbnail:hover {
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
-}
-.indexBody h1 {
-  margin-bottom: 15px;
-  font-size: 22px;
-  font-weight: 500;
-  line-height: 1;
-  color: inherit;
 }
 .spanMarginLeft {
 	margin-left: 25px;
@@ -4106,6 +4089,9 @@ a.thumbnail:hover {
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
+}
+.hero-unit-margin {
+	margin-top: 75px;
 }
 
 .center {

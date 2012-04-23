@@ -110,7 +110,8 @@ def profile(request, id):
     else:
         # Rendering profile page using id
         t = get_template('profile.html')
-        c = RequestContext(request, { 'ProfileUserName': user.username,
+        c = RequestContext(request, { 'UserName': user.username,
+                                      'ProfileUserName': user.username,
                                       'ProfileName': user.name,
                                       'ProfileSurname': user.surname,
                                       'ProfileGender': user.gender,
