@@ -123,6 +123,7 @@ def profile(request, id):
                                       'ProfileSurname': user.surname,
                                       'ProfileGender': user.gender,
                                       'ProfileBirthdate': user.birthdate,
-                                      'UserID': loggedUser.id })
+                                      'UserID': loggedUser.id,
+                                      'LoggedUsername': loggedUser.username })
         return HttpResponse(t.render(c))
         
