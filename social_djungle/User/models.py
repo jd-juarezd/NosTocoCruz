@@ -21,11 +21,22 @@ class Users(models.Model):
     surname = models.CharField(max_length = 40)
     gender = models.CharField(max_length = 10)
     birthdate = models.CharField(max_length = 10)
+    inactive = models.BooleanField()
     
     
     def __unicode__(self):
         return "%s %s: %s" % (self.name, self.surname, self.username)
     
+    def isInactive(self):
+        return self.inactive
+    
+    def deleteUser(self):
+        if (not Users.objects.filter(username=self.username)):
+             raise ValidationError('No existe un usuario con ese nombre.')
+        else:
+            self.inactive = True  
+            self.save()         
+        
     @classmethod
     def exists(cls, username):
         if Users.objects.filter(username=username):

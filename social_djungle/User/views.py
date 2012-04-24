@@ -22,7 +22,8 @@ def newUser(request):
                          name = request.POST['nombre'],
                          surname = request.POST['apellidos'],
                          gender = request.POST['gender'],
-                         birthdate = request.POST['birthdate'])
+                         birthdate = request.POST['birthdate'],
+                         inactive = False)
         else:
                 raise ValidationError('Las contraseñas no coinciden')
         Users.validateInput(user)
@@ -40,6 +41,29 @@ def newUser(request):
             request.session['newUser'] = True
         return HttpResponseRedirect('/')
 
+def removeUser(request):
+        #User ID
+        try:
+            id = request.session['id']
+        except:
+        # User is not logged in
+            return HttpResponseRedirect('/')
+    
+        try:
+            user = Users.objects.get(id = id)
+        except:
+                # User doesn't exist
+            return HttpResponseRedirect('/')
+        # User has been created
+        try:
+            user.deleteUser() # and saved to database
+            dbCookie = Session.objects.get(session_key = request.session.session_key)
+            request.session.flush()
+            dbCookie.delete()
+        except:
+            request.session['regError'] = 'El usuario no existe en la base de datos.'
+        return HttpResponseRedirect('/')
+
 @csrf_protect
 def login(request):
     if request.session.test_cookie_worked():
@@ -52,7 +76,7 @@ def login(request):
                 return HttpResponseRedirect('/')
                 pass
         else:
-            if user.matchPassword(password=password):
+            if (not user.isInactive()) and (user.matchPassword(password=password)):
                 request.session['id'] = str(user.id)
                 request.session['user_session'] = user.sessionID()
                 request.session.set_expiry(0)
@@ -60,7 +84,10 @@ def login(request):
                 return HttpResponseRedirect('/user/home')
             else:
                 t = get_template('index.html')
-                c = RequestContext(request, {'errorLogin': 'El usuario y/o la contraseña no son válidos'})
+                if user.isInactive():
+                    c = RequestContext(request, {'errorLogin': 'El usuario está desactivado.'})
+                else:
+                    c = RequestContext(request, {'errorLogin': 'El usuario y/o la contraseña no son válidos.'})
                 return HttpResponse(t.render(c))
     else:
         # Cookies are not enabled!
