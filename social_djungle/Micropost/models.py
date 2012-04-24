@@ -4,6 +4,9 @@ import re
 import datetime
 
 # Create your models here.
+class MicropostError(Exception):
+    def __init__(self, value):
+        self.value = value
 
 class Microposts(models.Model):
     id_post = models.IntegerField(primary_key=True)
@@ -22,16 +25,10 @@ class Microposts(models.Model):
             return True
         
     @classmethod
-    def exists_post(cls, id_post):
+    def exists(cls, id_post):
         if Microposts.objects.filter(id_post=id_post):
             return True
         else:
             return False
-    
-#    @classmethod
-#    def verify_post(cls, text, id_post):
-     
-#    @classmethod
-#    def verify_owner(cls, id_post):
 
        
