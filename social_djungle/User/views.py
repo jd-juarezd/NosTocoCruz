@@ -75,6 +75,9 @@ def logout(request):
     except:
         pass
     else:
+        dbSession = Session.objects.get(session_key = request.session.session_key)
+        dbSession.delete()
+        request.session.flush()
         return HttpResponseRedirect('/')
 
 def home(request):
