@@ -4016,7 +4016,7 @@ a.thumbnail:hover {
 	color: #FFF;
 }
 /* index.html */
-.bgimage {
+.bgcloud {
     background-attachment: fixed;
     background-clip: border-box;
     background-color: #7d3f02;
@@ -4024,17 +4024,19 @@ a.thumbnail:hover {
     background-origin: padding-box;
     background-position: center center;
     background-repeat: no-repeat;
-		background-size: 800px 600px;
+	background-size: 800px 600px;
     z-index: 0;
 }
-
 .logoBig {
-	margin-top: -18px;
+	margin-top: -30px;
 	margin-left: auto;
 	margin-right: auto;
-	height: 220px;
-	width: 250px;
-	margin-bottom: -60px;
+	margin-bottom: -10px;
+	width: 253px;
+}
+.logoBig img {
+	height: 178px;
+	width: 253px;
 }
 .logoSmall {
 	height: 100px;
@@ -4060,9 +4062,8 @@ a.thumbnail:hover {
 }
 .welcome {
 	font-family: verdana, arial, helvetica, sans-serif;
-	margin-left: -20px;
 	width: 740px;
-	padding: 20px 20px;
+	padding: 20px;
 	background-color: #eeeeee;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -4071,6 +4072,8 @@ a.thumbnail:hover {
 }
 .welcome h1{
 	text-align:center;
+	margin-bottom: 15px;
+	margin-top: 5px;
 }
 .hero-unit-margin {
 	margin-top: 75px;
@@ -4127,4 +4130,11 @@ a.thumbnail:hover {
 .navbar-login select {
   display: inline-block;
   margin-bottom: 0px;
+}
+.error-div {
+	margin-top: 50px;
+	height: 40px;
+}
+.index-navbar {
+	height: 90px;
 }

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang='es'>
+	
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<link type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">	
+	<title>Social Djungle - Configuracion</title>	
+
+<!-- SCRIPTS PARA MENU DESPLEGABLE -->
+<script src="{{ STATIC_URL }}bootstrap/js/jquery.js"></script>  
+<script src="{{ STATIC_URL }}bootstrap/js/bootstrap-dropdown.js"></script>  
+
+</head>
+	
+	
+<body class="bgimage">
+
+<div class="container">
+	<!-- TOP FIXED NAVBAR-->
+	<!-- To edit bar background colors: goto lines 2782 to 2800 @ bootstrap.css -->
+	<div class="navbar navbar-fixed-top">  
+		<div class="navbar-inner">  
+			<div class="container">  
+				<ul class="nav">  
+					<li class="brand">Social Djungle</li>  
+					<li><a href="/user/home">Home</a></li>  
+					<li><a href="/user/profile/{{ UserID }}/">Perfil</a></li>  
+					<li><a href="#">Fotos</a></li>  
+				</ul>  
+				<ul class="nav pull-right">  
+					<!--<li><form class="navbar-search"><input type="text" class="search-query" placeholder="Buscar"></form></li>-->          
+                  <li>
+                  	<div class='input-prepend' style="margin-top: 7px;">
+                  		<span class='add-on' style="margin-right: 0;">Buscar</span>
+                  		<input type="text" style="margin-left: -5px; margin-bottom: 0;">
+            	  	</div>
+                  </li>
+                  <li class="divider-vertical"></li>
+                  {% if UserName %}
+                  <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+          				{{ UserName }}
+          				<b class="caret"></b>
+    				</a>
+    				<ul class="dropdown-menu">
+      				  <li><a href="/user/config"><i class="icon-cog"></i>Configuración</a></li>
+                      <li class="divider"></li>
+                      <li class="nav-header">Cierre de sesión</li>
+                      <li><a href="/user/logout">Salir</a></li>
+    				</ul>
+  				  </li>
+  				  {% endif %}
+			    </ul> 
+			</div>  
+		</div>  
+	</div>
+
+
+	<!-- DOC BODY UNDER NAVBAR-->
+	<div class="well">
+		<h1>Configuración</h1>
+	</div>
+	
+	<div class="row">
+		<div class="span7 well">
+			<form class="form-horizontal form-inline">
+				<fieldset>
+					<legend>Datos de usuario:</legend>
+					<!--
+					<div class="control-group">
+						<label class="control-label">ID</label>
+						<div class="controls">
+							<span class="input-mini uneditable-input">{{ UserID }}</span>
+						</div>
+					</div>
+					-->
+					<div class="control-group">
+						<label class="control-label">Nombre de usuario</label>
+						<div class="controls">
+							<input class="input-large" type="text" value="{{ ProfileUserName }}" name="username" >
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Nombre</label>
+						<div class="controls">
+							<input class="input-large" type="text" value="{{ ProfileName }}" name="nombre" >
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Apellidos</label>
+						<div class="controls">
+							<input class="input-large" type="text" value="{{ ProfileSurname }}" name="apellidos" >
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Email</label>
+						<div class="controls">
+							<input class="input-large" type="email" value="{{ UserEmail }}" name="email" >
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Sexo</label>
+						<div class="controls">
+							<input class="input-medium" type="text" value="{{ ProfileGender }}" name="gender" >
+						</div>
+					</div>
+					<div class="control-group">
+						<button type="submit" class="btn btn-medium btn-warning pull-right" name="save_changes" >Guardar Cambios</button>
+					</div>																																	
+				</fieldset>
+			</form>
+		</div>
+		<div class="span4 well">
+			<form class="form">
+				<fieldset>
+					<legend>Cambiar contraseña:</legend>
+					<div class="control-group">
+						<label class="control-label">Contraseña actual</label>
+						<div class="controls">
+							<input type="password" class="input-medium" name="old_password">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Nueva contraseña</label>
+						<div class="controls">
+							<input type="password" class="input-medium" name="password">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Repita nueva contraseña</label>
+						<div class="controls">
+							<input type="password" class="input-medium" name="password_checker">
+						</div>
+					</div>
+					<div class="control-group">
+						<button type="submit" class="btn btn-medium btn-inverse pull-right" name="save_password" >Cambiar Contraseña</button>
+						<p class="alert alert-info"><strong>¡Cuidado! </strong>Una vez restablecida la contraseña, la anterior no será válida.</p>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>	
+	<div class="container final">
+		<div class="alert alert-info">
+			<p><strong>Ayuda:</strong></p>
+			<p>En esta sección, podrá consultar las dudas que tenga en cuanto se refiere a la modificación de los campos</p>
+			<p><a class="btn btn-primary btn-large">Más información</a></p>
+		</div>
+	</div>
+
+	<!-- DOC FOOTER-->
+	<div class="navbar navbar-fixed-bottom">
+		<div class="navbar-inner">  
+			<div class="container">  
+					<ul class="nav">
+						<li> <p class="footertext">Creado con <a href="http://twitter.github.com/bootstrap/" target="_blank"><strong>BootStrap</strong></a></p></li>
+						<li> <p class="footertext">Sígue el proyecto en <a href="https://github.com/alessandrofg/NosTocoCruz" target="_blank"><strong>GitHub</strong></a> </p></li>
+					</ul>
+					<ul class="nav pull-right">
+						<li><a href=#>Acerca de</a></li>
+						<li><a href=#>FAQ</a></li>
+						<li><a href=#>Contacto</a></li>
+					</ul>
+			</div>  
+		</div>  
+	</div>
+
+
+</div>
+
+</body>
+
+</html>
