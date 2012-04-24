@@ -102,6 +102,7 @@
 						<label class="control-label">Fecha de nacimiento</label>
 						<div class="controls">
 							<input class="input-medium" type="text" value="{{ Birthdate }}" name="gender" >
+							<span class="help-block">Formato (aaaa-mm-dd)</span>
 						</div>
 					</div>					
 					
@@ -121,22 +122,14 @@
               				</select>
             			</div>
           			</div>
-					<!--					
 					<div class="control-group">
-						<label class="control-label">Sexo</label>
-						<div class="controls">
-							<input class="input-medium" type="text" value="{{ Gender }}" name="gender" >
-						</div>
-					</div>
-					-->
-					<div class="control-group">
-						<button type="submit" class="btn btn-medium btn-warning pull-right" name="save_changes" >Guardar Cambios</button>
+						<button type="submit" class="btn btn-medium btn-info pull-right" name="save_changes" >Guardar Cambios</button>
 					</div>																																	
 				</fieldset>
 			</form>
 		</div>
 		<div class="span4 well">
-			<form class="form">
+			<form class="form form-inline">
 				<fieldset>
 					<legend>Cambiar contraseña:</legend>
 					<div class="control-group">
@@ -158,11 +151,16 @@
 						</div>
 					</div>
 					<div class="control-group">
-						<button type="submit" class="btn btn-medium btn-danger pull-right" name="save_password" >Cambiar Contraseña</button>
-						<p class="alert alert-info"><strong>¡Cuidado! </strong>Una vez restablecida la contraseña, la anterior no será válida.</p>
+						<button type="submit" class="btn btn-medium btn-warning pull-right" name="save_password" >Cambiar Contraseña</button>
+						<!--<p class="alert alert-info"><strong>¡Cuidado! </strong>Una vez restablecida la contraseña, la anterior no será válida.</p>-->
 					</div>
 				</fieldset>
 			</form>
+		</div>
+		<div class="span4 well">
+			<legend>Borrar Usuario:</legend>
+			<p> Pulse el botón <strong>"Borrar Usuario"</strong> si desea <strong>dar de baja su cuenta</strong>. </p>			
+			<a class="btn btn-danger pull-right" href="/user/removeUser" onclick="return confirm('¿Está seguro de que desea darse de baja?');">Borrar Usuario</a>
 		</div>
 	</div>	
 	<div class="container final">
