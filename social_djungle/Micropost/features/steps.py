@@ -20,17 +20,18 @@ def setUp():
 
 @step(r'I create a sample micropost')
 def write_micropost(step):
-    m = Microposts(author = world.user, text = "Hola Mundo", id_post = "12", length = len(text))
+    m = Microposts(author = world.user, text = "Hola Mundo", id_post = "12", date_post = datetime.datetime.now())
     world.micropost = m
-    assert isinstance(m,Micropost)
+    assert isinstance(m,Microposts)
+    world.micropost.save()
     
 @step(r'Then The text length is correct')
 def text_length(step):
-    assert Microposts.validateLength(world.micropost.length)
+    assert Microposts.validateLength(world.micropost.text)
     
-@step(r'Then It should be created correctly')
+@step(r'Then micropost should be created correctly')
 def create_post(step):
-    assert  Microposts.exists(id=world.micropost.id_post)
+    assert  Microposts.exists(id_post=world.micropost.id_post)
     
 @step(r'When I publish a micropost the written text will be the same as the published text')
 def check_post(step):
@@ -51,10 +52,16 @@ def owner_post(step):
         assert dbMicropost.author == world.micropost.author
         
 @after.all
-def cleanup():
+def cleaning(arg):
     try:
         user = Users.objects.get(username = world.user.username)
     except:
         pass
     else:
         user.delete()
+    try:
+        micropost = Microposts.objects.get(id_post = world.micropost.id_post)
+    except:
+        pass
+    else:
+        micropost.delete()
