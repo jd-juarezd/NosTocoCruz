@@ -63,7 +63,7 @@
 	
 	<div class="row">
 		<div class="span7 well">
-			<form class="form-horizontal form-inline">
+			<form id='modify_user_data' class="form-horizontal form-inline" method="post" action="/user/modifydata"> {% csrf_token %}
 				<fieldset>
 					<legend>Datos de usuario:</legend>
 					<!--
@@ -129,7 +129,7 @@
 			</form>
 		</div>
 		<div class="span4 well">
-			<form class="form form-inline">
+			<form id='modify_user_password' class="form form-inline" method="post" action="/user/modifypassword"> {% csrf_token %}
 				<fieldset>
 					<legend>Cambiar contraseña:</legend>
 					<div class="control-group">

@@ -41,6 +41,25 @@ def newUser(request):
             request.session['newUser'] = True
         return HttpResponseRedirect('/')
 
+"""    
+def modifydata(request):
+    
+    
+"""    
+def modifypassword(request):
+    id = request.session['id']
+    user = Users.objects.get(id=id)
+    oldpassword = request.POST['old_password']
+    newpassword = request.POST['password']
+    newpasswordcheck = request.POST['password_checker']
+    
+    if ((user.matchPassword(oldpassword)) and (newpassword == newpasswordcheck)):
+        encPassword = hashlib.sha1('%s -- %s' % (newpassword, str(user.timestamp))).hexdigest()
+        user.password = encPassword
+        return HttpResponseRedirect('/user/logout')
+    else:
+        return HttpResponseRedirect('/user/config')
+
 def removeUser(request):
         #User ID
         try:
