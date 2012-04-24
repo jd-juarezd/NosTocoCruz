@@ -6,5 +6,6 @@ urlpatterns = patterns('User.views',
     url(r'^logout/?', 'logout'),
     url(r'^home/?$', 'home'),
     url(r'^config/?$', 'config'),
+    url(r'^removeUser/?$', 'removeUser'),
     url(r'^profile/([0-9]+)/?$', 'profile'),
 )
