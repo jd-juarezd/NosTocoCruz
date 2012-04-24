@@ -77,33 +77,58 @@
 					<div class="control-group">
 						<label class="control-label">Nombre de usuario</label>
 						<div class="controls">
-							<input class="input-large" type="text" value="{{ ProfileUserName }}" name="username" >
+							<input class="input-large" type="text" value="{{ UserName }}" name="username" >
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Nombre</label>
 						<div class="controls">
-							<input class="input-large" type="text" value="{{ ProfileName }}" name="nombre" >
+							<input class="input-large" type="text" value="{{ Name }}" name="nombre" >
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Apellidos</label>
 						<div class="controls">
-							<input class="input-large" type="text" value="{{ ProfileSurname }}" name="apellidos" >
+							<input class="input-large" type="text" value="{{ Surname }}" name="apellidos" >
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Email</label>
 						<div class="controls">
-							<input class="input-large" type="email" value="{{ UserEmail }}" name="email" >
+							<input class="input-large" type="email" value="{{ Email }}" name="email" >
 						</div>
 					</div>
 					<div class="control-group">
+						<label class="control-label">Fecha de nacimiento</label>
+						<div class="controls">
+							<input class="input-medium" type="text" value="{{ Birthdate }}" name="gender" >
+						</div>
+					</div>					
+					
+					
+					<div class="control-group">
+            			<label class="control-label" for="gender">Sexo</label>
+            			<div class="controls">
+              				<select name="gender" class="input-medium">
+                			{% if Gender == "Hombre" %}	
+                				<option selected="selected">Hombre</option>
+                				<option>Mujer</option>
+                			{% endif %}
+                			{% if Gender == "Mujer" %}	
+                				<option>Hombre</option>
+                				<option selected="selected">Mujer</option>
+                			{% endif %}                			
+              				</select>
+            			</div>
+          			</div>
+					<!--					
+					<div class="control-group">
 						<label class="control-label">Sexo</label>
 						<div class="controls">
-							<input class="input-medium" type="text" value="{{ ProfileGender }}" name="gender" >
+							<input class="input-medium" type="text" value="{{ Gender }}" name="gender" >
 						</div>
 					</div>
+					-->
 					<div class="control-group">
 						<button type="submit" class="btn btn-medium btn-warning pull-right" name="save_changes" >Guardar Cambios</button>
 					</div>																																	
@@ -133,7 +158,7 @@
 						</div>
 					</div>
 					<div class="control-group">
-						<button type="submit" class="btn btn-medium btn-inverse pull-right" name="save_password" >Cambiar Contraseña</button>
+						<button type="submit" class="btn btn-medium btn-danger pull-right" name="save_password" >Cambiar Contraseña</button>
 						<p class="alert alert-info"><strong>¡Cuidado! </strong>Una vez restablecida la contraseña, la anterior no será válida.</p>
 					</div>
 				</fieldset>

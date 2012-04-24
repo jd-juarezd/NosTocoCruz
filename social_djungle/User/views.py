@@ -128,4 +128,34 @@ def profile(request, id):
                                       'UserID': loggedUser.id,
                                       'LoggedUsername': loggedUser.username })
         return HttpResponse(t.render(c))
+    
+def config(request):
+    try:
+        id = request.session['id']
+    except:
+        # User is not logged in
+        return HttpResponseRedirect('/')
+    else:
+        #User maybe has logged in
+        try:
+            dbCookie = Session.objects.get(session_key = request.session.session_key).get_decoded()
+            if (not Users.is_authenticated(session_key = request.session.session_key, cookie = request.session)):
+                raise CookieError
+        except:
+            # Bad cookie
+            request.session.flush()
+            return HttpResponseRedirect('/')
+        else:
+            user = Users.objects.get(id = dbCookie['id'])
+            t = get_template('config.html')
+            # Here we load all user information with context
+            c = RequestContext(request, {'UserID': user.id,
+                                         'UserName': user.username,
+                                         'Name': user.name,
+                                         'Surname': user.surname,
+                                         'Email': user.email,
+                                         'Birthdate': user.birthdate,
+                                         'Gender': user.gender })
+            return HttpResponse(t.render(c))    
+        
         
