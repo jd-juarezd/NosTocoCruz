@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<title>Social Djungle | {{ section }}</title>
+    
+    {% include "partials/includes.html" %}
+	</head>
+<body class="bgimage">
+	
+<div class="container">
+	{% include "partials/navbar.html" %}
+
+	{% block content %}
+
+	{% endblock %}
+
+	{% include "partials/footer.html" %}
+</div>
+</body>
+</html>

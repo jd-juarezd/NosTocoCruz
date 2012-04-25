@@ -1845,9 +1845,8 @@ table .span24 {
   clear: both;
   font-weight: normal;
   line-height: 18px;
-  color: #00F;
+  color: #333;
   white-space: nowrap;
-  text-decoration: underline;
 }
 .dropdown-menu li > a:hover,
 .dropdown-menu .active > a,
@@ -4114,3 +4113,14 @@ a.thumbnail:hover {
 .index-navbar {
 	height: 90px;
 }
+.index-link {
+  display: block;
+  padding: 3px 15px;
+  clear: both;
+  font-weight: normal;
+  line-height: 18px;
+  color: #00F;
+  white-space: nowrap;
+  text-decoration: underline;
+}
+
