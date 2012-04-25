@@ -85,8 +85,15 @@
    * =================================== */
 
   $(function () {
-    $('html').on('click.dropdown.data-api', clearMenus)
+ /* Modificado menu dropdown para que no se cierre al hacer click en el */
+ //   $('html').on('click.dropdown.data-api', clearMenus)
+	$(document).bind('click', function(e) {
+    	var $clicked = $(e.target);
+    	if (! $clicked.parents().hasClass("dropdown"))
+        	clearMenus()
+    });
     $('body').on('click.dropdown.data-api', toggle, Dropdown.prototype.toggle)
   })
 
 }( window.jQuery );
+
