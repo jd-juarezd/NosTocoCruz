@@ -41,11 +41,29 @@ def newUser(request):
             request.session['newUser'] = True
         return HttpResponseRedirect('/')
 
-"""    
 def modifydata(request):
+    name = request.POST['name']
+    surname = request.POST['surname']
+    email = request.POST['email']
+    birthdate = request.POST['birthdate']
+    gender = request.POST['gender']
     
+    user = Users.objects.get(id = request.session['id'])
+    if Users.validateEmail(email):
+        user.name = name
+        user.surname = surname
+        user.email = email
+        user.birthdate = birthdate
+        user.gender = gender
+        user.save()
+        request.session['configOK'] = 'Los datos se han actualizado satisfactoriamente.'
+    else:
+        request.session['configError'] = 'El campo email no es válido. Los datos no han sido actualizados.'
+    return HttpResponseRedirect('/user/config')
+        
+        
     
-"""    
+  
 def modifypassword(request):
     id = request.session['id']
     user = Users.objects.get(id=id)
@@ -222,6 +240,9 @@ def config(request):
             if (request.session.get('configError', False)):
                 context.update({ 'configError': request.session['configError'] })
                 del request.session['configError']
+            if (request.session.get('configOK', False)):
+                context.update({ 'configOK': request.session['configOK'] })
+                del request.session['configOK']
             if (request.session.get('passwordError', False)):
                 context.update({ 'passwordError': request.session['passwordError'] })
                 del request.session['passwordError']
