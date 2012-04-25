@@ -202,7 +202,7 @@ def profile(request, id):
                                          'ProfileGender': user.gender,
                                          'ProfileBirthdate': user.birthdate,
                                          'UserID': loggedUser.id,
-                                         'LoggedUsername': loggedUser.username })
+                                         'UserName': loggedUser.username })
             return HttpResponse(t.render(c))
         else:
             return HttpResponseRedirect('/user/home')
