@@ -2,12 +2,15 @@ from lettuce import *
 from lxml import html
 from django.test.client import Client
 from nose.tools import assert_equals
+from User.models import Users
+import datetime
+
 
 #http://tech.yipit.com/2011/12/23/lettuce-best-and-worst-practices-1/
 #http://lxml.de/lxmlhtml.html
 
-@before.each_scenario
-def prepare_browser(scenario):
+@before.all
+def setup():
     world.browser = Client()
 
 @step(r'I access the url "(.*)"')
