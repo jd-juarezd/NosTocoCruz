@@ -60,9 +60,14 @@
 	<div class="well">
 		<h1>Configuración</h1>
 	</div>
-	
 	<div class="row">
 		<div class="span7 well">
+			{% if configError %} 
+			<div class="alert alert-error">
+				<a class="close" data-dismiss="alert">x</a> 
+				<strong> {{ configError }} </strong>
+			</div> 
+			{% endif %}
 			<form id='modify_user_data' class="form-horizontal form-inline" method="post" action="/user/modifydata"> {% csrf_token %}
 				<fieldset>
 					<legend>Datos de usuario:</legend>
@@ -129,6 +134,18 @@
 			</form>
 		</div>
 		<div class="span4 well">
+		{% if passwordError %} 
+			<div class="alert alert-error">
+				<a class="close" data-dismiss="alert">x</a> 
+				<strong> {{ passwordError }} </strong>
+			</div> 
+		{% endif %}
+		{% if passwordOK %} 
+			<div class="alert alert-success">
+				<a class="close" data-dismiss="alert">x</a> 
+				<strong> {{ passwordOK }} </strong>
+			</div> 
+		{% endif %}
 			<form id='modify_user_password' class="form form-inline" method="post" action="/user/modifypassword"> {% csrf_token %}
 				<fieldset>
 					<legend>Cambiar contraseña:</legend>
