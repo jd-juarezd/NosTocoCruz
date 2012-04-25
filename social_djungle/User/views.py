@@ -176,7 +176,8 @@ def home(request):
             t = get_template('home.html')
             # Here we load all user information with context
             c = RequestContext(request, { 'UserName': user.username,
-                                          'UserID': user.id })
+                                          'UserID': user.id,
+                                          'section': 'Home' })
             return HttpResponse(t.render(c))
 
 def profile(request, id):
@@ -202,7 +203,8 @@ def profile(request, id):
                                          'ProfileGender': user.gender,
                                          'ProfileBirthdate': user.birthdate,
                                          'UserID': loggedUser.id,
-                                         'UserName': loggedUser.username })
+                                         'UserName': loggedUser.username,
+                                         'section': 'Perfil' })
             return HttpResponse(t.render(c))
         else:
             return HttpResponseRedirect('/user/home')
@@ -233,7 +235,8 @@ def config(request):
                        'Surname': user.surname,
                        'Email': user.email,
                        'Birthdate': user.birthdate,
-                       'Gender': user.gender,}
+                       'Gender': user.gender,
+                       'section': 'Configuración'}
             if (request.session.get('configError', False)):
                 context.update({ 'configError': request.session['configError'] })
                 del request.session['configError']
