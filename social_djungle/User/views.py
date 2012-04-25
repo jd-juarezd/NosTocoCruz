@@ -61,9 +61,6 @@ def modifydata(request):
         request.session['configError'] = 'El campo email no es válido. Los datos no han sido actualizados.'
     return HttpResponseRedirect('/user/config')
         
-        
-    
-  
 def modifypassword(request):
     id = request.session['id']
     user = Users.objects.get(id=id)
@@ -138,10 +135,7 @@ def login(request):
                 return HttpResponseRedirect('/user/home')
             else:
                 t = get_template('index.html')
-                if user.isInactive():
-                    c = RequestContext(request, {'errorLogin': 'El usuario está desactivado.'})
-                else:
-                    c = RequestContext(request, {'errorLogin': 'El usuario y/o la contraseña no son válidos.'})
+                c = RequestContext(request, {'errorLogin': 'El usuario y/o la contraseña no son válidos.'})
                 return HttpResponse(t.render(c))
     else:
         # Cookies are not enabled!
@@ -199,16 +193,19 @@ def profile(request, id):
         # Likely, user with id = id has not been found
         return HttpResponseRedirect('/user/home')
     else:
-        # Rendering profile page using id
-        t = get_template('profile.html')
-        c = RequestContext(request, { 'ProfileUserName': user.username,
-                                      'ProfileName': user.name,
-                                      'ProfileSurname': user.surname,
-                                      'ProfileGender': user.gender,
-                                      'ProfileBirthdate': user.birthdate,
-                                      'UserID': loggedUser.id,
-                                      'LoggedUsername': loggedUser.username })
-        return HttpResponse(t.render(c))
+        if (not user.inactive):
+            # Rendering profile page using id
+            t = get_template('profile.html')
+            c = RequestContext(request, { 'ProfileUserName': user.username,
+                                         'ProfileName': user.name,
+                                         'ProfileSurname': user.surname,
+                                         'ProfileGender': user.gender,
+                                         'ProfileBirthdate': user.birthdate,
+                                         'UserID': loggedUser.id,
+                                         'LoggedUsername': loggedUser.username })
+            return HttpResponse(t.render(c))
+        else:
+            return HttpResponseRedirect('/user/home')
     
 def config(request):
     try:
