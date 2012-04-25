@@ -9,127 +9,138 @@
 	<script src="{{ STATIC_URL }}bootstrap/js/bootstrap-alert.js"></script>  	
 	<title>Bienvenido a Social Djungle</title>	
 </head>
-<!-- La clase bggradient pone de fondo un gradiente entre dos colores-->
 <body class="bgcloud">
 	<div class="container">
-<!-- Parte superior de la pagina de bienvenida -->
-		<div class="navbar navbar-fixed-top">  
+	<!-- Parte superior de la pagina de bienvenida -->
+	<div class="navbar navbar-fixed-top">  
 		<div class="navbar-inner">  
 			<div class="container">  
-				<ul class="nav">  
-					<li class="brand">Social Djungle</li>  
-				</ul>
-				<form id="login" class="navbar-login pull-right" action="/user/login" method="post"> {% csrf_token %}
-					<input class="navbar-input" type="text" name="username" placeholder="Nombre de usuario...">
-					<input class="navbar-input" type="password" name="password" placeholder="Contraseña...">
-					<button type="submit" class="btn login-btn">Entrar</button>
-				</form>
-				</div>
-			</div>  
-		</div>  
-<!-- Cuerpo de la pagina de bienvenida -->
-			<div class="error-div">
-			{% if errorLogin %} 
-			<div class="alert alert-error">
-				<a class="close" data-dismiss="alert">x</a> 
-				<strong> {{ errorLogin }} </strong>
-			</div> 
-			{% endif %}
-			{% if regError %}
-			<div class="alert alert-error">
-				<a class="close" data-dismiss="alert">x</a> 
-				<strong> {{ regError }} </strong>
-			</div> 
-			{% endif %}
-			{% if newUser %}
-			<div class="alert success">
-				<a class="close" data-dismiss="alert">x</a> 
-				<strong> {{ newUser }} </strong>
-			</div> 
-			{% endif %}
-			</div>
-			<!-- Columna de login -->
-			<div class='logoBig center'>
-				<img src="{{ STATIC_URL }}img/panther.png" alt='Logo Social Djungle'>				
-			</div>			
-			<!-- Columna de Registro -->
-			<div class='welcome center'>
-				<h1>¿Nuevo usuario? ¡Regístrate!</h1>
-				<form id='registro' class="form-horizontal" method="post" action="/user/newuser"> {% csrf_token %}
-<fieldset>
-<div class="control-group">
-<label class="control-label" for="username">Nombre de usuario</label>
-<div class="controls">
-<input type="text" class="input-medium" name="username">
-</div>
-</div>
-<div class="control-group">
-<label class="control-label" for="nombre">Nombre</label>
-<div class="controls">
-<input type="text" class="input-medium" name="nombre">
-</div>
-</div>
-<div class="control-group">
-<label class="control-label" for="password">Apellidos</label>
-<div class="controls">
-<input type="text" class="input-medium" name="apellidos">
-</div>
-</div>
-<div class="control-group">
-<label class="control-label" for="username">Email</label>
-<div class="controls">
-<input type="text" class="input-medium" name="email">
-</div>
-</div>
-<div class="control-group">
-<label class="control-label" for="username">Contraseña</label>
-<div class="controls">
-<input type="password" class="input-medium" name="password_register">
-</div>
-</div>
-<div class="control-group">
-<label class="control-label" for="username">Repetir contraseña</label>
-<div class="controls">
-<input type="password" class="input-medium" name="password_register_checker">
-</div>
-</div>
-<div class="control-group">
-            <label class="control-label" for="gender">Sexo</label>
-            <div class="controls">
-              <select name="gender" class="input-medium">
-                <option>Hombre</option>
-                <option>Mujer</option>
-              </select>
-            </div>
-          </div>
-<div class="control-group">
-<label class="control-label" for="username">Fecha de nacimiento</label>
-<div class="controls">
-<input type="text" class="input-medium" name="birthdate">
-<span class="help-inline">Formato (aaaa-mm-dd)</span>
-</div>
-</div>
-<div class="control-group">
-            <div class="controls">
-             <input class="btn-small" type="submit" name="register" value="Crear Cuenta">
-            </div>
-          </div>
-</fieldset>
-</form>  
-			</div>
-			
-		</div>
-	<div class="container">
-		<!-- Pie de pagina -->
-		<div class="indexFooter">
-			<ul>
-				<li><a href=#>Acerca de</a></li>
-				<li><a href=#>FAQ</a></li>
-				<li><a href=#>Contacto</a></li>
+			<ul class="nav">  
+				<li class="brand">Social Djungle</li>  
+			</ul>
+			<ul class="nav pull-right"> 
+				<li class="dropdown">
+					<a href="" class="dropdown-toggle" data-toggle="dropdown">
+					<strong>Iniciar sesión</strong><b class="caret"></b>
+					</a>
+					<form id="login" class="navbar-login pull-right" action="/user/login" method="post"> {% csrf_token %}
+					<ul class="dropdown-menu">
+						<li><input class="input-large" type="text" name="username" placeholder="Nombre de usuario..."></li>
+						<li>
+							<input class="input-medium" type="password" name="password" placeholder="Contraseña...">
+							<button type="submit" class="btn btn-primary btn-medium">Entrar</button>
+						</li>
+						<li>	
+							<label><input type='checkbox' name='remember'/> No cerrar sesión </label> 
+							<a href=#> ¿Olvidaste la contraseña? </a>
+						</li>
+					</ul>
+					</form>
+				</li>	
 			</ul>
 			</div>
-			
-		</div>
-	
+		</div>  
+	</div>  
+<!-- Cuerpo de la pagina de bienvenida -->
+	<div class="error-div">
+		{% if errorLogin %} 
+		<div class="alert alert-error">
+			<a class="close" data-dismiss="alert">x</a> 
+			<strong> {{ errorLogin }} </strong>
+		</div> 
+		{% endif %}
+		{% if regError %}
+		<div class="alert alert-error">
+			<a class="close" data-dismiss="alert">x</a> 
+			<strong> {{ regError }} </strong>
+		</div> 
+		{% endif %}
+		{% if newUser %}
+		<div class="alert success">
+			<a class="close" data-dismiss="alert">x</a> 
+			<strong> {{ newUser }} </strong>
+		</div> 
+		{% endif %}
+	</div>
+<!-- Imagen encima de formulario de registro -->
+	<div class='logoBig center'>
+		<img src="{{ STATIC_URL }}img/panther.png" alt='Logo Social Djungle'>				
+	</div>			
+<!-- Seccion de registro -->
+	<div class='welcome center'>
+		<h1>¿Nuevo usuario? ¡Regístrate!</h1>
+		<form id='registro' class="form-horizontal" method="post" action="/user/newuser"> {% csrf_token %}
+		<fieldset>
+			<div class="control-group">
+				<label class="control-label" for="username">Nombre de usuario</label>
+				<div class="controls">
+					<input type="text" class="input-medium" name="username">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="nombre">Nombre</label>
+				<div class="controls">
+					<input type="text" class="input-medium" name="nombre">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="password">Apellidos</label>
+				<div class="controls">
+					<input type="text" class="input-medium" name="apellidos">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="username">Email</label>
+				<div class="controls">
+					<input type="text" class="input-medium" name="email">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="username">Contraseña</label>
+				<div class="controls">
+					<input type="password" class="input-medium" name="password_register">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="username">Repetir contraseña</label>
+				<div class="controls">
+					<input type="password" class="input-medium" name="password_register_checker">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="gender">Sexo</label>
+				<div class="controls">
+					<select name="gender" class="input-medium">
+						<option>Hombre</option>
+						<option>Mujer</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="username">Fecha de nacimiento</label>
+				<div class="controls">
+					<input type="text" class="input-medium" name="birthdate">
+					<span class="help-inline">Formato (aaaa-mm-dd)</span>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<button class="btn btn-primary btn-small" type="submit" name="register">Crear Cuenta</button>
+				</div>
+			</div>
+		</fieldset>
+		</form>  
+	</div>			
+</div>
+
+<!-- Pie de pagina -->
+<div class="indexFooter">
+	<ul>
+		<li><a href=#>Acerca de</a></li>
+		<li><a href=#>FAQ</a></li>
+		<li><a href=#>Contacto</a></li>
+	</ul>
+</div>			
+
 </body>
 </html>
