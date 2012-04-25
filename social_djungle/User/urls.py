@@ -8,5 +8,6 @@ urlpatterns = patterns('User.views',
     url(r'^config/?$', 'config'),
     url(r'^removeUser/?$', 'removeUser'),
     url(r'^modifypassword/?$', 'modifypassword'),
+    url(r'^modifydata/?$', 'modifydata'),
     url(r'^profile/([0-9]+)/?$', 'profile'),
 )

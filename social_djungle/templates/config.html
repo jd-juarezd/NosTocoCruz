@@ -60,48 +60,45 @@
 	<div class="well">
 		<h1>Configuración</h1>
 	</div>
-	
 	<div class="row">
 		<div class="span7 well">
+			{% if configError %} 
+			<div class="alert alert-error">
+				<a class="close" data-dismiss="alert">x</a> 
+				<strong> {{ configError }} </strong>
+			</div> 
+			{% endif %}
+			{% if configOK %} 
+			<div class="alert alert-success">
+				<a class="close" data-dismiss="alert">x</a> 
+				<strong> {{ configOK }} </strong>
+			</div> 
+			{% endif %}
 			<form id='modify_user_data' class="form-horizontal form-inline" method="post" action="/user/modifydata"> {% csrf_token %}
 				<fieldset>
-					<legend>Datos de usuario:</legend>
-					<!--
-					<div class="control-group">
-						<label class="control-label">ID</label>
-						<div class="controls">
-							<span class="input-mini uneditable-input">{{ UserID }}</span>
-						</div>
-					</div>
-					-->
-					<div class="control-group">
-						<label class="control-label">Nombre de usuario</label>
-						<div class="controls">
-							<input class="input-large" type="text" value="{{ UserName }}" name="username" >
-						</div>
-					</div>
+					<legend>Datos del usuario {{ UserName }}:</legend>
 					<div class="control-group">
 						<label class="control-label">Nombre</label>
 						<div class="controls">
-							<input class="input-large" type="text" value="{{ Name }}" name="nombre" >
+							<input class="input-large" type="text" value="{{ Name }}" name="name" >
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Apellidos</label>
 						<div class="controls">
-							<input class="input-large" type="text" value="{{ Surname }}" name="apellidos" >
+							<input class="input-large" type="text" value="{{ Surname }}" name="surname" >
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Email</label>
 						<div class="controls">
-							<input class="input-large" type="email" value="{{ Email }}" name="email" >
+							<input class="input-large" type="text" value="{{ Email }}" name="email" >
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Fecha de nacimiento</label>
 						<div class="controls">
-							<input class="input-medium" type="text" value="{{ Birthdate }}" name="gender" >
+							<input class="input-medium" type="text" value="{{ Birthdate }}" name="birthdate" >
 							<span class="help-block">Formato (aaaa-mm-dd)</span>
 						</div>
 					</div>					
@@ -129,6 +126,18 @@
 			</form>
 		</div>
 		<div class="span4 well">
+		{% if passwordError %} 
+			<div class="alert alert-error">
+				<a class="close" data-dismiss="alert">x</a> 
+				<strong> {{ passwordError }} </strong>
+			</div> 
+		{% endif %}
+		{% if passwordOK %} 
+			<div class="alert alert-success">
+				<a class="close" data-dismiss="alert">x</a> 
+				<strong> {{ passwordOK }} </strong>
+			</div> 
+		{% endif %}
 			<form id='modify_user_password' class="form form-inline" method="post" action="/user/modifypassword"> {% csrf_token %}
 				<fieldset>
 					<legend>Cambiar contraseña:</legend>

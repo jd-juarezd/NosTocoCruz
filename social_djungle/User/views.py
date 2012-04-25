@@ -41,11 +41,29 @@ def newUser(request):
             request.session['newUser'] = True
         return HttpResponseRedirect('/')
 
-"""    
 def modifydata(request):
+    name = request.POST['name']
+    surname = request.POST['surname']
+    email = request.POST['email']
+    birthdate = request.POST['birthdate']
+    gender = request.POST['gender']
     
+    user = Users.objects.get(id = request.session['id'])
+    if Users.validateEmail(email):
+        user.name = name
+        user.surname = surname
+        user.email = email
+        user.birthdate = birthdate
+        user.gender = gender
+        user.save()
+        request.session['configOK'] = 'Los datos se han actualizado satisfactoriamente.'
+    else:
+        request.session['configError'] = 'El campo email no es válido. Los datos no han sido actualizados.'
+    return HttpResponseRedirect('/user/config')
+        
+        
     
-"""    
+  
 def modifypassword(request):
     id = request.session['id']
     user = Users.objects.get(id=id)
@@ -53,12 +71,28 @@ def modifypassword(request):
     newpassword = request.POST['password']
     newpasswordcheck = request.POST['password_checker']
     
-    if ((user.matchPassword(oldpassword)) and (newpassword == newpasswordcheck)):
-        encPassword = hashlib.sha1('%s -- %s' % (newpassword, str(user.timestamp))).hexdigest()
-        user.password = encPassword
-        return HttpResponseRedirect('/user/logout')
+    if (Users.validatePassword(newpassword)):
+        error = False
+        try:
+            assert user.matchPassword(oldpassword)
+        except:
+            error = True
+            request.session['passwordError'] = 'La contraseña antigua no coincide.'
+            
+        try:
+            assert newpassword == newpasswordcheck
+        except:
+            error = True
+            request.session['passwordError'] = 'La contraseña nueva no coincide con la confirmación de contraseña.'
+            
+        if (not error):
+            encPassword = hashlib.sha1('%s -- %s' % (newpassword, str(user.timestamp))).hexdigest()
+            user.password = encPassword
+            user.save()
+            request.session['passwordOK'] = 'La contraseña ha sido modificada satisfactoriamente.'
     else:
-        return HttpResponseRedirect('/user/config')
+        request.session['passwordError'] = 'La contraseña no tiene la complejidad requerida.'
+    return HttpResponseRedirect('/user/config')
 
 def removeUser(request):
         #User ID
@@ -92,8 +126,9 @@ def login(request):
             user = Users.objects.get(username=username)
         except:
                 # User doesn't exist
-                return HttpResponseRedirect('/')
-                pass
+                t = get_template('index.html')
+                c = RequestContext(request, {'errorLogin': 'El usuario y/o la contraseña no son válidos.'})
+                return HttpResponse(t.render(c))
         else:
             if (not user.isInactive()) and (user.matchPassword(password=password)):
                 request.session['id'] = str(user.id)
@@ -195,13 +230,26 @@ def config(request):
             user = Users.objects.get(id = dbCookie['id'])
             t = get_template('config.html')
             # Here we load all user information with context
-            c = RequestContext(request, {'UserID': user.id,
-                                         'UserName': user.username,
-                                         'Name': user.name,
-                                         'Surname': user.surname,
-                                         'Email': user.email,
-                                         'Birthdate': user.birthdate,
-                                         'Gender': user.gender })
+            context = {'UserID': user.id,
+                       'UserName': user.username,
+                       'Name': user.name,
+                       'Surname': user.surname,
+                       'Email': user.email,
+                       'Birthdate': user.birthdate,
+                       'Gender': user.gender,}
+            if (request.session.get('configError', False)):
+                context.update({ 'configError': request.session['configError'] })
+                del request.session['configError']
+            if (request.session.get('configOK', False)):
+                context.update({ 'configOK': request.session['configOK'] })
+                del request.session['configOK']
+            if (request.session.get('passwordError', False)):
+                context.update({ 'passwordError': request.session['passwordError'] })
+                del request.session['passwordError']
+            if (request.session.get('passwordOK', False)):
+                context.update({ 'passwordOK': request.session['passwordOK'] })
+                del request.session['passwordOK']
+            c = RequestContext(request, context)
             return HttpResponse(t.render(c))    
         
         
