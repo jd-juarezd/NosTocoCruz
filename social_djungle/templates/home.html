@@ -1,11 +1,87 @@
 {% extends 'loggedTemplate.html' %}
 
 {% block content %}
-<div class="hero-unit">
-  <h1>Bienvenidos a Social Djungle</h1>
-  <p>
-    Hola {% if UserName %} {{ UserName }} ! {% endif %}
-  </p>
-  <p><a class="btn btn-primary btn-large">Más información</a></p>
+<div class="row">
+	<div class="span8 span-style">
+		<div class="span-content">
+			<h1> Escribir micropost </h1>
+			<form class="inline-form" id="newMicropost">
+				<textarea class="input-xlarge" rows="2" placeholder="Escriba aquí lo que se le ocurra..."></textarea>
+				<button class="btn btn-primary btn-large" type="submit">Publicar</button>
+			</form>
+		</div>
+	</div>
+	<div class="span4 invisible">
+		<h1> COLUMNA DERECHA </h1>
+	</div>
+	
 </div>
+<div class="row">
+	<div class="span8 span-style">
+		<div class="span-content">
+			<h1> Timeline </h1>
+		</div>
+		<div class="micropost">
+			<div class="micropost-header">
+				<ul>
+						<li class="pull-left">Username</li>
+						<li class="pull-right">Fecha</li>
+				</ul>
+			</div>
+			<div class="micropost-content">
+				<p>
+					Contenido del micropost	...
+				</p>
+			</div>
+		</div>
+		<div class="micropost">
+			<div class="micropost-header">
+				<ul>
+						<li class="pull-left">Username</li>
+						<li class="pull-right">Fecha</li>
+				</ul>
+			</div>
+			<div class="micropost-content">
+				<p>
+					Contenido del micropost	...
+				</p>
+			</div>
+		</div>
+		<div class="micropost">
+			<div class="micropost-header">
+				<ul>
+						<li class="pull-left">Username</li>
+						<li class="pull-right">Fecha</li>
+				</ul>
+			</div>
+			<div class="micropost-content">
+				<p>
+					Contenido del micropost	...
+				</p>
+			</div>
+		</div>
+		<div class="micropost">
+			<div class="micropost-header">
+				<ul>
+						<li class="pull-left">Username</li>
+						<li class="pull-right">Fecha</li>
+				</ul>
+			</div>
+			<div class="micropost-content">
+				<p>
+					Contenido del micropost	...
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="span4 span-style">
+		<div class="span-content">
+			<h1> Imágenes </h1>
+		</div>
+	</div>
+	
+</div>
+	
+
+
 {% endblock %}

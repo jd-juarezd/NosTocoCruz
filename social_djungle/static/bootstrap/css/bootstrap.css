@@ -4015,6 +4015,38 @@ a.thumbnail:hover {
 	font-size: 125%;
 	color: #FFF;
 }
+.span-style {
+	margin-top: 15px;
+	background-color: #eee;
+	-webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  opacity: 0.9;
+}
+.span-content {
+	padding: 10px;
+}
+.span-content h1 {
+	font-size: 170%;
+}
+.micropost {
+	border: 2px solid black;
+	clear:both;
+	margin: 10px;
+	padding: 10px;
+}
+.micropost-header {
+	font-size: 120%;
+}
+.micropost-header ul {
+	margin: auto;
+	list-style: none;
+}
+.micropost-content {
+	border-top: 2px solid black;
+	clear:both;
+	font-size: 120%;
+}
 /* index.html */
 .bgcloud {
     background-attachment: fixed;
@@ -4024,7 +4056,7 @@ a.thumbnail:hover {
     background-origin: padding-box;
     background-position: center center;
     background-repeat: no-repeat;
-	background-size: 800px 600px;
+		background-size: 800px 600px;
     z-index: 0;
 }
 .logoBig {
@@ -4064,6 +4096,7 @@ a.thumbnail:hover {
 	font-family: verdana, arial, helvetica, sans-serif;
 	width: 740px;
 	padding: 20px;
+	margin-top: 20px;
 	background-color: #eeeeee;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
