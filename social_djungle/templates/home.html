@@ -4,9 +4,9 @@
 <div class="row">
 	<div class="span8 span-style">
 		<div class="span-content">
-			<h1> Escribir micropost </h1>
-			<form class="inline-form" id="newMicropost">
-				<textarea class="input-xlarge" rows="2" placeholder="Escriba aquí lo que se le ocurra..."></textarea>
+			<h1> Publicar </h1>
+			<form class="inline-form" id="newMicropost" method="post" action="/micropost/new"> {% csrf_token %}
+				<textarea name="publication" class="input-xlarge" rows="2" placeholder="Escriba aquí lo que se le ocurra..."></textarea>
 				<button class="btn btn-primary btn-large" type="submit">Publicar</button>
 			</form>
 		</div>
