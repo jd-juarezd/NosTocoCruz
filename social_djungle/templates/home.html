@@ -21,58 +21,21 @@
 		<div class="span-content">
 			<h1> Timeline </h1>
 		</div>
+		{% for m in micropostList %}
 		<div class="micropost">
 			<div class="micropost-header">
 				<ul>
-						<li class="pull-left">Username</li>
-						<li class="pull-right">Fecha</li>
+						<li class="pull-left">{{ m.author.username }}</li>
+						<li class="pull-right">{{ m.date_post }}</li>
 				</ul>
 			</div>
 			<div class="micropost-content">
 				<p>
-					Contenido del micropost	...
+					{{ m.text }}
 				</p>
 			</div>
 		</div>
-		<div class="micropost">
-			<div class="micropost-header">
-				<ul>
-						<li class="pull-left">Username</li>
-						<li class="pull-right">Fecha</li>
-				</ul>
-			</div>
-			<div class="micropost-content">
-				<p>
-					Contenido del micropost	...
-				</p>
-			</div>
-		</div>
-		<div class="micropost">
-			<div class="micropost-header">
-				<ul>
-						<li class="pull-left">Username</li>
-						<li class="pull-right">Fecha</li>
-				</ul>
-			</div>
-			<div class="micropost-content">
-				<p>
-					Contenido del micropost	...
-				</p>
-			</div>
-		</div>
-		<div class="micropost">
-			<div class="micropost-header">
-				<ul>
-						<li class="pull-left">Username</li>
-						<li class="pull-right">Fecha</li>
-				</ul>
-			</div>
-			<div class="micropost-content">
-				<p>
-					Contenido del micropost	...
-				</p>
-			</div>
-		</div>
+		{% endfor %}
 	</div>
 	<div class="span4 span-style">
 		<div class="span-content">

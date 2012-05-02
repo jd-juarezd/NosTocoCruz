@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from User.models import Users, ValidationError, CookieError
+from Micropost.models import Microposts
 from django.shortcuts import render_to_response, render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 import hashlib
@@ -173,11 +174,15 @@ def home(request):
             return HttpResponseRedirect('/')
         else:
             user = Users.objects.get(id = dbCookie['id'])
+            # Posts that have to be shown in home page
+            posts = Microposts.objects.filter(author = user)
+            posts = posts.order_by('-date_post')
             t = get_template('home.html')
             # Here we load all user information with context
             c = RequestContext(request, { 'UserName': user.username,
                                           'UserID': user.id,
-                                          'section': 'Home' })
+                                          'section': 'Home',
+                                          'micropostList': posts })
             return HttpResponse(t.render(c))
 
 def profile(request, id):
