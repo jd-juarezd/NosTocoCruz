@@ -4021,7 +4021,6 @@ a.thumbnail:hover {
 	-webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
-  opacity: 0.9;
 }
 .span-content {
 	padding: 10px;
@@ -4030,31 +4029,68 @@ a.thumbnail:hover {
 	font-size: 170%;
 }
 .micropost {
-	border: 2px solid black;
+	border-top: 1px dotted #aaa;
 	clear:both;
-	margin: 10px;
+	margin: 0;
 	padding: 10px;
+	-webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.avatar {
+	display: inline;
+	padding: 10px;
+	border: 1px dotted #000;
+	-webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+	height: 50px;
+	width: 50px;
+}
+.micropost-text {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	width: 500px;
 }
 .micropost-header {
-	font-size: 120%;
+	font-size: 150%;
 }
 .micropost-header ul {
-	margin: auto;
+	margin: 0;
+	padding-left: 15px;
 	list-style: none;
 }
+
 .micropost-content {
-	border-top: 2px solid black;
+	padding-left: 10px;
+	padding-top: 0;
 	clear:both;
-	font-size: 120%;
+	width: inherit;
+	font-size: 14px;
+}
+.micropost-content pre {
+	width: inherit;
+	background-color: inherit;
+	font-style: inherit;
+	font-family: inherit;
+	font-size: 100%;
+	border: 0;
+	border-radius: inherit;
+	width: inherit;
+	height: 40px;
+	text-align: justify;
+	word-wrap: normal;
+}
+.separe-bottom {
+	margin-bottom: 70px;
 }
 /* index.html */
 .bgcloud {
     background-attachment: fixed;
     background-clip: border-box;
-    background-color: #7d3f02;
+    background-color: #0a0c01;
     background-image:url("../../img/fondo3.png");
     background-origin: padding-box;
-    background-position: center center;
+    background-position: center 100px;
     background-repeat: no-repeat;
 		background-size: 800px 600px;
     z-index: 0;
