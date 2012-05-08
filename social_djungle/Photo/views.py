@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+'''
      
 from Photo.ImageModel import Photos
 from django.http import HttpResponseRedirect
@@ -25,3 +25,4 @@ def index (request):
 def display (request, id):
      foto = Photo.objects.get(pk = id)
      return render_to_response ('image.html', {'foto': foto})
+'''

@@ -1,3 +1,4 @@
+'''
 from django.db import models
 from imagekit.models import ImageModel
 
@@ -71,3 +72,4 @@ class AttachmentForm (forms. Form):
          if not im.formato in ['JPEG', 'PNG']:
              raise forms.ValidationError ("Just jpg oro png filas please")
          return cleaned
+'''
