@@ -5,7 +5,9 @@
 				<ul class="nav">  
 					<li class="brand">Social Djungle</li>  
 					<li {% if section == "Home" %}class="active"{% endif %}><a href="/user/home">Home</a></li>  
-					<li {% if section == "Perfil" %}class="active"{% endif %}><a href="/user/profile/{{ UserID }}/">Perfil</a></li>  
+					<li {% if section == "Perfil" %}class="active"{% endif %}><a href="/user/profile/{{ UserID }}/">Perfil</a></li>
+					<li {% if section == "Gente" %}class="active"{% endif %}><a href="#">Gente</a></li>  
+					<li {% if section == "Mensajes" %}class="active"{% endif %}><a href="#">Mensajes</a></li>    
 					<li {% if section == "Fotos" %}class="active"{% endif %}><a href="#">Fotos</a></li>  
 				</ul> 				
         <ul class="nav pull-right">          

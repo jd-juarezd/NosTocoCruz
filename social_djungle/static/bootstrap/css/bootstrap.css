@@ -4078,22 +4078,22 @@ a.thumbnail:hover {
 	width: inherit;
 	height: 40px;
 	text-align: justify;
-	word-wrap: normal;
+	word-wrap:break-word;
 }
 .separe-bottom {
 	margin-bottom: 70px;
 }
 /* index.html */
 .bgcloud {
-    background-attachment: fixed;
-    background-clip: border-box;
-    background-color: #0a0c01;
-    background-image:url("../../img/fondo3.png");
-    background-origin: padding-box;
-    background-position: center 100px;
-    background-repeat: no-repeat;
-		background-size: 800px 600px;
-    z-index: 0;
+  background-attachment: fixed;
+  background-clip: border-box;
+  background-color: #0a0c01;
+  background-image:url("../../img/fondo3.png");
+  background-origin: padding-box;
+  background-position: center 100px;
+  background-repeat: no-repeat;
+	background-size: 800px 600px;
+  z-index: 0;
 }
 .logoBig {
 	margin-top: 0;
@@ -4143,9 +4143,6 @@ a.thumbnail:hover {
 	text-align:center;
 	margin-bottom: 15px;
 	margin-top: 5px;
-}
-.hero-unit-margin {
-	margin-top: 75px;
 }
 .center {
 	margin-left: auto;
