@@ -138,15 +138,14 @@ def createFriendship(step):
                  gender = "Hombre", timestamp = datetime.datetime.now())
     user.saveUser()
     friend.saveUser()
-    friendship = Friendships(user.id, friend.id)
+    friendship = Friendships(user = user, friend = friend, confirmed = False)
     friendship.saveFriendship()
-    
     
 @step(r'And I get it from the database')
 def getFriendship(step):
-    queryset = Friendships.objects.filter(user.email == "correo@correo.com")
-    if (queryset):
-        world.friendship = queryset.get()
+    query = Friendships.objects.filter(user = Users.objects.get(username = "Usuario"))
+    if (query):
+        world.friendship = query[0]
 
 @step(r'Then It should have a user')
 def hasUser(step):
@@ -160,7 +159,7 @@ def hasFriend(step):
 def checkFriendship(step):
     user1 = "Usuario" 
     user2 = "Usuario2"
-    assert Friendships.isFriend(user1, user2) == true
+    assert Friendships.isFriend(user1, user2) == True
 
 ##########
 

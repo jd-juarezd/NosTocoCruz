@@ -104,8 +104,16 @@ class Users(models.Model):
 class Friendships(models.Model):
     user = models.ForeignKey('Users', related_name='+')
     friend = models.ForeignKey('Users', related_name='+')
+    confirmed = models.BooleanField()
+    
+    def __unicode__(self):
+        return "-%s es amigo de %s-" % (self.user.username, self.friend.username)
     
     def saveFriendship(self):
+        self.save()
+    
+    def confirmFriendship(self):
+        self.confirmed = True
         self.save()
     
     @classmethod
@@ -114,5 +122,9 @@ class Friendships(models.Model):
     
     @classmethod
     def isFriend(cls, user1, user2): 
-        pass
-    
+        query = Friendships.objects.filter(user = Users.objects.get(username = user1), 
+                                           friend = Users.objects.get(username = user2))
+        if (query):
+            return True
+        else:
+            return False
