@@ -1,9 +1,9 @@
 {% extends 'loggedTemplate.html' %}
 
 {% block content %}
-<div class="row">
+<!--<div class="row">
 	<div class="span8 span-style">
-		<div class="span-content">
+	<div class="span-content">
 			<h1> Publicar </h1>
 			<form class="inline-form" id="newMicropost" method="post" action="/micropost/new"> {% csrf_token %}
 				<textarea name="publication" class="input-xlarge" rows="2" placeholder="Escriba aquí lo que se le ocurra..."></textarea>
@@ -12,19 +12,25 @@
 		</div>
 	</div>
 	<div class="span4 invisible">
-		<h1> COLUMNA DERECHA </h1>
+		<div class="span-content">
+			<h1> EMPTY </h1>
+		</div>
 	</div>
-	
-</div>
+</div>-->
 <div class="row">
 	<div class="span8 span-style separe-bottom">
 		<div class="span-content">
+			<h1> Publicar </h1>
+			<form class="inline-form" id="newMicropost" method="post" action="/micropost/new"> {% csrf_token %}
+				<textarea name="publication" class="input-xlarge" rows="2" placeholder="Escriba aquí lo que se le ocurra..."></textarea>
+				<button class="btn btn-primary btn-large" type="submit">Publicar</button>
+			</form>
 			<h1> Timeline </h1>
 		</div>
 		{% for m in micropostList %}
 		<div class="micropost">
 			<div class ="pull-left avatar">
-				<p> Foto </p>
+				<img src="http://placehold.it/50x50">
 			</div>
 			<div class="pull-left micropost-text">
 				<div class="micropost-header">
@@ -37,15 +43,30 @@
 					<pre>{{ m.text }}</pre>
 				</div>
 			</div>
+			{% if m.author.username == UserName %}
+			<a class="pull-right" href="/micropost/delete/{{ m.id_post }}" onclick="return confirm('¿Está seguro de que desea borrar el micropost?');">Borrar<i class="icon-trash"> </i></a>
+			{% endif %}
 		</div>
 		{% endfor %}
 	</div>
 	<div class="span4 span-style">
 		<div class="span-content">
 			<h1> Fotos </h1>
+			<ul class="thumbnails">
+  		<li class="span3">
+    		<a href="#" class="thumbnail">
+      	<img src="http://placehold.it/260x180" alt="">
+    		</a>
+  		</li>
+  		<li class="span3">
+    		<a href="#" class="thumbnail">
+      	<img src="http://placehold.it/260x180" alt="">
+    		</a>
+  		</li>
+
+</ul>
 		</div>
 	</div>
-	
 </div>
 	
 

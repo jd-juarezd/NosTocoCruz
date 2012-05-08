@@ -2,15 +2,15 @@
 
 {% block content %}
 <div class="hero-unit">
-  <h1>Perfil de {% if ProfileUserName %}{{ ProfileUserName }}{% endif %}</h1>
+  <h1>Perfil de {% if ProfileUser %}{{ ProfileUser }}{% endif %}</h1>
   <p>
     Información personal:
     <div>
     	<!-- Informacion personal-->
-    	<p>Nombre: {{ ProfileName }}</p>
-    	<p>Apellidos: {{ ProfileSurname }}</p>
-    	<p>Sexo: {{ ProfileGender }}</p>
-    	<p>Fecha de nacimiento: {{ ProfileBirthdate }}</p>
+    	<p>Nombre: {{ ProfileUser.name }}</p>
+    	<p>Apellidos: {{ ProfileUser.surname }}</p>
+    	<p>Sexo: {{ ProfileUser.gender }}</p>
+    	<p>Fecha de nacimiento: {{ ProfileUser.birthdate }}</p>
     </div>
   </p>
   <p><a class="btn btn-primary btn-large">Más información</a></p>
