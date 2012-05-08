@@ -1,12 +1,14 @@
 {% extends 'loggedTemplate.html' %}
 
 {% block content %}
-<div class="hero-unit">
+<!--
+	PLACEHOLDER
+	<div class="hero-unit">
   <h1>Perfil de {% if ProfileUser %}{{ ProfileUser }}{% endif %}</h1>
   <p>
     Información personal:
     <div>
-    	<!-- Informacion personal-->
+    	Informacion personal
     	<p>Nombre: {{ ProfileUser.name }}</p>
     	<p>Apellidos: {{ ProfileUser.surname }}</p>
     	<p>Sexo: {{ ProfileUser.gender }}</p>
@@ -14,5 +16,49 @@
     </div>
   </p>
   <p><a class="btn btn-primary btn-large">Más información</a></p>
+</div>-->
+<div class="row profile-style">
+		<div class="big-bgimage">
+			<img src="http://placehold.it/840x250">
+		</div>
+		<div class="user-image">
+			<img src="http://placehold.it/260x180">
+		</div>
+		<h1>{{ ProfileUser.name}} {{ ProfileUser.surname}}</h1>
+		<ul class="pull-left">
+			<li>Nombre de usuario: {{ ProfileUser.name }} </li>
+			<li>Fecha de nacimiento: {{ ProfileUser.birthdate }}</li>
+			<li>Sexo: {{ ProfileUser.gender }}</li>
+			<li>Fotos</li>
+		</ul>
+		<ul class="pull-right">
+			<li>Fotos</li>
+			<li>Amigos</li>
+		</ul>
+</div>
+<div class="row profile-style">
+	<h1>Últimas publicaciones</h1>
+<!--	{% for m in micropostList %}
+		<div class="micropost">
+			<div class ="pull-left avatar">
+				<img src="http://placehold.it/50x50">
+			</div>
+			<div class="pull-left micropost-text">
+				<div class="micropost-header">
+					<ul>
+							<li class="pull-left">{{ m.author.username }}</li>
+							<li class="pull-right">{{ m.date_post }}</li>
+					</ul>
+				</div>
+				<div class="micropost-content">
+					<pre>{{ m.text }}</pre>
+				</div>
+			</div>
+			{% if m.author.username == UserName %}
+			<a class="pull-right" href="/micropost/delete/{{ m.id_post }}" onclick="return confirm('¿Está seguro de que desea borrar el micropost?');"><i class="icon-trash"></i> Borrar</a>
+			{% endif %}
+		</div>
+		{% endfor %}
+</div> -->
 </div>
 {% endblock %}
