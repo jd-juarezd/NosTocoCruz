@@ -66,12 +66,15 @@
               {% endif %}                			
               </select>
             </div>
-          	</div>
+          </div>
 					<div class="control-group">
 						<button type="submit" class="btn btn-medium btn-info pull-right" name="save_changes" >Guardar Cambios</button>
 					</div>																																	
 				</fieldset>
 			</form>
+			<legend>Borrar Usuario:</legend>
+			<p> Pulse el botón <strong>"Borrar Usuario"</strong> si desea <strong>dar de baja su cuenta</strong>. </p>			
+			<a class="btn btn-danger pull-right" href="/user/removeUser" onclick="return confirm('¿Está seguro de que desea darse de baja?');">Borrar Usuario</a>
 		</div>
 		<div class="span5 span-style span-content">
 		{% if passwordError %} 
@@ -114,10 +117,10 @@
 				</fieldset>
 			</form>
 		</div>
-		<div class="span6 span-style span-content separe-bottom">
+		<!--<div class="span6 span-style span-content separe-bottom">
 			<legend>Borrar Usuario:</legend>
 			<p> Pulse el botón <strong>"Borrar Usuario"</strong> si desea <strong>dar de baja su cuenta</strong>. </p>			
 			<a class="btn btn-danger pull-right" href="/user/removeUser" onclick="return confirm('¿Está seguro de que desea darse de baja?');">Borrar Usuario</a>
-		</div>
+		</div>-->
 	</div>	
 {% endblock %}

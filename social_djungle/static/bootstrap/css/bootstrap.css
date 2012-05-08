@@ -587,7 +587,7 @@ legend {
   line-height: 36px;
   color: #333333;
   border: 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ddd;
 }
 legend small {
   font-size: 13.5px;
@@ -4027,6 +4027,8 @@ a.thumbnail:hover {
 }
 .span-content h1 {
 	font-size: 170%;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 10px;
 }
 .micropost {
 	border-top: 1px dotted #aaa;
@@ -4039,7 +4041,7 @@ a.thumbnail:hover {
 }
 .avatar {
 	display: inline;
-	padding: 10px;
+	padding: 0;
 	border: 1px dotted #000;
 	-webkit-border-radius: 3px;
   -moz-border-radius: 3px;
