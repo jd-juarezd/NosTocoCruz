@@ -17,3 +17,14 @@ def newMicropost(request):
         return HttpResponseRedirect("/user/home")
     else:
         HttpResponseRedirect("/")
+        
+def deleteMicropost(request, postID):
+    # Comprobar que usuario debe estar logueado
+    
+    user = Users.objects.get(id = request.session['id'])
+    m = Microposts.objects.get(id_post = postID)
+    if (m.author == user):
+        m.delete()
+        return HttpResponseRedirect("/user/home")
+    else:
+        HttpResponseRedirect("/")
