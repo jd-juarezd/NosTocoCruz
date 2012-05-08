@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     url(r'^user/?', include('User.urls')),
     url(r'^micropost/?', include('Micropost.urls')),
     url(r'^', include('frontend.urls')), 
-    url(r'^ $', 'sample.views.index', name = "main-page"),
-    url(r'^ display/(? P <id> \ d +)/ $', 'Photo.views.display', name = "display-image")
+   # url(r'^ $', 'sample.views.index', name = "main-page"),
+   # url(r'^ display/(? P <id> \ d +)/ $', 'Photo.views.display', name = "display-image")
     
 )
