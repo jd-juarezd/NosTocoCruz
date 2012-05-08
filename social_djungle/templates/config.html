@@ -1,26 +1,32 @@
 {% extends 'loggedTemplate.html' %}
 
 {% block content %}
-<div class="well">
-		<h1>Configuración</h1>
+<div class="row">
+	<div class="config-welcome">
+		<div class="alert alert-info">
+			<h1>Configuración</h1>
+			<p>En esta sección podrá modificar su perfil.</p>
+			<p><a href=#><button class="btn btn-primary btn-large"><i class="icon-info-sign icon-white"></i> Más información</button></a></p>
+		</div>
 	</div>
-	<div class="row">
-		<div class="span7 well">
-			{% if configError %} 
-			<div class="alert alert-error">
-				<a class="close" data-dismiss="alert">x</a> 
-				<strong> {{ configError }} </strong>
-			</div> 
-			{% endif %}
-			{% if configOK %} 
-			<div class="alert alert-success">
-				<a class="close" data-dismiss="alert">x</a> 
-				<strong> {{ configOK }} </strong>
-			</div> 
-			{% endif %}
-			<form id='modify_user_data' class="form-horizontal form-inline" method="post" action="/user/modifydata"> {% csrf_token %}
-				<fieldset>
-					<legend>Datos del usuario {{ UserName }}:</legend>
+</div>
+<div class="row center">
+	<div class="span6 span-style span-content">
+	{% if configError %} 
+		<div class="alert alert-error">
+			<a class="close" data-dismiss="alert">x</a> 
+			<strong> {{ configError }} </strong>
+		</div> 
+	{% endif %}
+	{% if configOK %} 
+		<div class="alert alert-success">
+			<a class="close" data-dismiss="alert">x</a> 
+			<strong> {{ configOK }} </strong>
+		</div> 
+	{% endif %}
+		<form id='modify_user_data' class="form-horizontal" method="post" action="/user/modifydata"> {% csrf_token %}
+			<fieldset>
+				<legend>Datos del usuario {{ UserName }}:</legend>
 					<div class="control-group">
 						<label class="control-label">Nombre</label>
 						<div class="controls">
@@ -45,31 +51,29 @@
 							<input class="input-medium" type="text" value="{{ Birthdate }}" name="birthdate" >
 							<span class="help-block">Formato (aaaa-mm-dd)</span>
 						</div>
-					</div>					
-					
-					
+					</div>
 					<div class="control-group">
-            			<label class="control-label" for="gender">Sexo</label>
-            			<div class="controls">
-              				<select name="gender" class="input-medium">
-                			{% if Gender == "Hombre" %}	
-                				<option selected="selected">Hombre</option>
-                				<option>Mujer</option>
-                			{% endif %}
-                			{% if Gender == "Mujer" %}	
-                				<option>Hombre</option>
-                				<option selected="selected">Mujer</option>
-                			{% endif %}                			
-              				</select>
-            			</div>
-          			</div>
+          	<label class="control-label" for="gender">Sexo</label>
+            <div class="controls">
+              <select name="gender" class="input-medium">
+              {% if Gender == "Hombre" %}	
+              	<option selected="selected">Hombre</option>
+              	<option>Mujer</option>
+              {% endif %}
+              {% if Gender == "Mujer" %}	
+              	<option>Hombre</option>
+              	<option selected="selected">Mujer</option>
+              {% endif %}                			
+              </select>
+            </div>
+          	</div>
 					<div class="control-group">
 						<button type="submit" class="btn btn-medium btn-info pull-right" name="save_changes" >Guardar Cambios</button>
 					</div>																																	
 				</fieldset>
 			</form>
 		</div>
-		<div class="span4 well">
+		<div class="span5 span-style span-content">
 		{% if passwordError %} 
 			<div class="alert alert-error">
 				<a class="close" data-dismiss="alert">x</a> 
@@ -82,7 +86,7 @@
 				<strong> {{ passwordOK }} </strong>
 			</div> 
 		{% endif %}
-			<form id='modify_user_password' class="form form-inline" method="post" action="/user/modifypassword"> {% csrf_token %}
+			<form id='modify_user_password' class="form form-horizontal" method="post" action="/user/modifypassword"> {% csrf_token %}
 				<fieldset>
 					<legend>Cambiar contraseña:</legend>
 					<div class="control-group">
@@ -110,17 +114,10 @@
 				</fieldset>
 			</form>
 		</div>
-		<div class="span4 well">
+		<div class="span6 span-style span-content separe-bottom">
 			<legend>Borrar Usuario:</legend>
 			<p> Pulse el botón <strong>"Borrar Usuario"</strong> si desea <strong>dar de baja su cuenta</strong>. </p>			
 			<a class="btn btn-danger pull-right" href="/user/removeUser" onclick="return confirm('¿Está seguro de que desea darse de baja?');">Borrar Usuario</a>
 		</div>
 	</div>	
-	<div class="container final">
-		<div class="alert alert-info">
-			<p><strong>Ayuda:</strong></p>
-			<p>En esta sección, podrá consultar las dudas que tenga en cuanto se refiere a la modificación de los campos</p>
-			<p><a class="btn btn-primary btn-large">Más información</a></p>
-		</div>
-	</div>
 {% endblock %}
