@@ -100,3 +100,6 @@ class Users(models.Model):
                                  self.timestamp,
                                  str(datetime.datetime.now()))).hexdigest()
         return id
+
+class Friendship(models.Model):
+    

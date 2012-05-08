@@ -127,7 +127,42 @@ def hasBirthdate(step):
 def hasGender(step):
     assert world.user2.gender == 'Hombre'
     
-###########
+# Tests de la clase Friendship #
+@step(r'When I create a new relationship')
+def createFriendship(step):
+    user = Users(email = "foo@bar2.com", username="FooBar", password = "1234",
+                 name = "Someone", surname = "Somebody", birthdate = "1991-12-12",
+                 gender = "Hombre", timestamp = datetime.datetime.now())
+    friend = Users(email = "foo@bar.com", username="FooBar2", password = "1234",
+                 name = "Anyone", surname = "Somebody", birthdate = "1991-12-12",
+                 gender = "Hombre", timestamp = datetime.datetime.now())
+    user.saveUser()
+    friend.saveUser()
+    friendship = Friendship(user, friend)
+    friendship.saveFriendship()
+    
+    
+@step(r'And I retrieve it from the database')
+def getFriendship(step):
+    queryset = Friendships.objects.filter(email = "foo@bar2.com")
+    if (queryset):
+        world.friendship = queryset.get()
+
+@step(r'Then It should have a user')
+def hasUser(step):
+    assert world.friendship.user.email == "foo@bar2.com"
+
+@step(r'And It should have a friend')
+def hasFriend(step):
+    assert world.friendship.friend.email == "foo@bar.com"
+
+@step(r'And user should be friendOf friend')
+def checkFriendship(step):
+    user1 = "Someone" 
+    user2 = "Anyone"
+    assert Friendship.isFriend(user1, user2) == true
+
+##########
 
 @after.all
 def cleanDatabase(arg):
