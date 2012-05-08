@@ -23,6 +23,17 @@ def deleteCookie(request):
     dbCookie = Session.objects.get(session_key = request.session.session_key)
     request.session.flush()
     dbCookie.delete()
+    
+def getFriends(user):
+    friendsNames = []
+    friendships = Friendships.objects.filter(user = user)
+    for i in friendships:
+        friendsNames += [i.friend.username]
+    friendships = Friendships.objects.filter(friend = user)
+    for i in friendships:
+        friendsNames += [i.user.username]
+    friends = Users.objects.filter(username__in = friendsNames)
+    return friends
 
 @csrf_protect
 def newUser(request):
@@ -164,14 +175,7 @@ def home(request):
         return HttpResponseRedirect("/")
     
     user = Users.objects.get(id = request.session['id'])
-    friendsNames = []
-    friendships = Friendships.objects.filter(user = user)
-    for i in friendships:
-        friendsNames += [i.friend.username]
-    friendships = Friendships.objects.filter(friend = user)
-    for i in friendships:
-        friendsNames += [i.user.username]
-    friends = Users.objects.filter(username__in = friendsNames)
+    friends = getFriends(user)
     # Posts that have to be shown in home page
     userPosts = Microposts.objects.filter(author = user)
     friendPosts = Microposts.objects.filter(author__in=friends)
