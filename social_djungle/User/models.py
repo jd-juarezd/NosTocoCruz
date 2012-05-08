@@ -101,5 +101,4 @@ class Users(models.Model):
                                  str(datetime.datetime.now()))).hexdigest()
         return id
 
-class Friendship(models.Model):
     

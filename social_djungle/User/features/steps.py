@@ -138,7 +138,7 @@ def createFriendship(step):
                  gender = "Hombre", timestamp = datetime.datetime.now())
     user.saveUser()
     friend.saveUser()
-    friendship = Friendship(user, friend)
+    friendship = Friendships(user, friend)
     friendship.saveFriendship()
     
     
@@ -160,7 +160,7 @@ def hasFriend(step):
 def checkFriendship(step):
     user1 = "Someone" 
     user2 = "Anyone"
-    assert Friendship.isFriend(user1, user2) == true
+    assert Friendships.isFriend(user1, user2) == true
 
 ##########
 
@@ -174,5 +174,10 @@ def cleanDatabase(arg):
     try:
         u2 = Users.objects.get(username = world.user2.username)
         u2.delete()
+    except:
+        pass
+    try:
+        f1 = Friendships.objects.get(user = world.friendship.user)
+        f1.delete()
     except:
         pass
