@@ -52,7 +52,7 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = '/home/jose/Apatana Studio 3 Workspace/NosTocoCruz/social_djungle/Photo/photos/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     'lettuce.django',
     'User',
     'Micropost',
+    'Photo',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
