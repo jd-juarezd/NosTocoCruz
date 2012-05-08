@@ -24,7 +24,5 @@ def deleteMicropost(request, postID):
     user = Users.objects.get(id = request.session['id'])
     m = Microposts.objects.get(id_post = postID)
     if (m.author == user):
-        m.delete()
-        return HttpResponseRedirect("/user/home")
-    else:
-        HttpResponseRedirect("/")
+        m.delete() 
+    return HttpResponseRedirect("/user/home")
