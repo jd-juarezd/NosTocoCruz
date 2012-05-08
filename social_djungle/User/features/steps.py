@@ -2,7 +2,7 @@ from lettuce import *
 from lxml import html
 from django.test.client import Client
 from nose.tools import assert_equals
-from User.models import Users,ValidationError
+from User.models import Users,Friendships,ValidationError
 import datetime
 
 @step(r'I create a sample user')
@@ -130,36 +130,36 @@ def hasGender(step):
 # Tests de la clase Friendship #
 @step(r'When I create a new relationship')
 def createFriendship(step):
-    user = Users(email = "foo@bar2.com", username="FooBar", password = "1234",
+    user = Users(email = "correo@correo.com", username="Usuario", password = "1234",
                  name = "Someone", surname = "Somebody", birthdate = "1991-12-12",
                  gender = "Hombre", timestamp = datetime.datetime.now())
-    friend = Users(email = "foo@bar.com", username="FooBar2", password = "1234",
+    friend = Users(email = "correo2@correo.com", username="Usuario2", password = "1234",
                  name = "Anyone", surname = "Somebody", birthdate = "1991-12-12",
                  gender = "Hombre", timestamp = datetime.datetime.now())
     user.saveUser()
     friend.saveUser()
-    friendship = Friendships(user, friend)
+    friendship = Friendships(user.id, friend.id)
     friendship.saveFriendship()
     
     
-@step(r'And I retrieve it from the database')
+@step(r'And I get it from the database')
 def getFriendship(step):
-    queryset = Friendships.objects.filter(email = "foo@bar2.com")
+    queryset = Friendships.objects.filter(user.email == "correo@correo.com")
     if (queryset):
         world.friendship = queryset.get()
 
 @step(r'Then It should have a user')
 def hasUser(step):
-    assert world.friendship.user.email == "foo@bar2.com"
+    assert world.friendship.user.email == "correo@correo.com"
 
 @step(r'And It should have a friend')
 def hasFriend(step):
-    assert world.friendship.friend.email == "foo@bar.com"
+    assert world.friendship.friend.email == "correo2@correo.com"
 
 @step(r'And user should be friendOf friend')
 def checkFriendship(step):
-    user1 = "Someone" 
-    user2 = "Anyone"
+    user1 = "Usuario" 
+    user2 = "Usuario2"
     assert Friendships.isFriend(user1, user2) == true
 
 ##########
@@ -174,6 +174,16 @@ def cleanDatabase(arg):
     try:
         u2 = Users.objects.get(username = world.user2.username)
         u2.delete()
+    except:
+        pass
+    try:
+        u3 = Users.objects.get(username = "Usuario")
+        u3.delete()
+    except:
+        pass
+    try:
+        u4 = Users.objects.get(username = "Usuario2")
+        u4.delete()
     except:
         pass
     try:

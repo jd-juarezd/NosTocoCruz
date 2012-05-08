@@ -37,7 +37,7 @@ Feature: Validating User Model
 		
 	Scenario: Friendship working and correctly stored
 		When I create a new relationship
-		And I retrieve it from the database
+		And I get it from the database
 		Then It should have a user
 		And It should have a friend
 		And user should be friendOf friend
