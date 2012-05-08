@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from User.models import Users, ValidationError, CookieError
+from User.models import Users, Friendships, ValidationError, CookieError
 from Micropost.models import Microposts
 from django.shortcuts import render_to_response, render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
@@ -160,33 +160,30 @@ def logout(request):
         return HttpResponseRedirect('/')
 
 def home(request):
-    try:
-        id = request.session['id']
-    except:
-        # User is not logged in
-        return HttpResponseRedirect('/')
-    else:
-        #User maybe has logged in
-        try:
-            dbCookie = Session.objects.get(session_key = request.session.session_key).get_decoded()
-            if (not Users.is_authenticated(session_key = request.session.session_key, cookie = request.session)):
-                raise CookieError
-        except:
-            # Bad cookie
-            deleteCookie(request)
-            return HttpResponseRedirect('/')
-        else:
-            user = Users.objects.get(id = dbCookie['id'])
-            # Posts that have to be shown in home page
-            posts = Microposts.objects.filter(author = user)
-            posts = posts.order_by('-date_post')
-            t = get_template('home.html')
-            # Here we load all user information with context
-            c = RequestContext(request, { 'UserName': user.username,
-                                          'UserID': user.id,
-                                          'section': 'Home',
-                                          'micropostList': posts })
-            return HttpResponse(t.render(c))
+    if (not userIsLogged(request)):
+        return HttpResponseRedirect("/")
+    
+    user = Users.objects.get(id = request.session['id'])
+    friendsNames = []
+    friendships = Friendships.objects.filter(user = user)
+    for i in friendships:
+        friendsNames += [i.friend.username]
+    friendships = Friendships.objects.filter(friend = user)
+    for i in friendships:
+        friendsNames += [i.user.username]
+    friends = Users.objects.filter(username__in = friendsNames)
+    # Posts that have to be shown in home page
+    userPosts = Microposts.objects.filter(author = user)
+    friendPosts = Microposts.objects.filter(author__in=friends)
+    posts = userPosts | friendPosts
+    posts = posts.order_by('-date_post')
+    t = get_template('home.html')
+    # Here we load all user information with context
+    c = RequestContext(request, { 'UserName': user.username,
+                                    'UserID': user.id,
+                                    'section': 'Home',
+                                    'micropostList': posts })
+    return HttpResponse(t.render(c))
 
 def profile(request, id):
     if (not userIsLogged(request)):

@@ -37,8 +37,9 @@
 					<pre>{{ m.text }}</pre>
 				</div>
 			</div>
+			{% if m.author.username == UserName %}
 			<a class="pull-right" href="/micropost/delete/{{ m.id_post }}" onclick="return confirm('¿Está seguro de que desea borrar el micropost?');">Borrar<i class="icon-trash"> </i></a>
-
+			{% endif %}
 		</div>
 		{% endfor %}
 	</div>
