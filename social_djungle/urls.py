@@ -1,4 +1,7 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls.defaults import *
+from django.conf import settings 
+from django.contrib import admin
+admin. autodiscover ()
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -16,5 +19,8 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^user/?', include('User.urls')),
     url(r'^micropost/?', include('Micropost.urls')),
-    url(r'^', include('frontend.urls')),
+    url(r'^', include('frontend.urls')), 
+    url(r'^ $', 'sample.views.index', name = "main-page"),
+    url(r'^ display/(? P <id> \ d +)/ $', 'Photo.views.display', name = "display-image")
+    
 )
