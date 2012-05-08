@@ -10,6 +10,20 @@ from django.template.loader import get_template
 from django.template import RequestContext
 from django.contrib.sessions.models import Session
 
+def userIsLogged(request):
+    try:
+        id = request.session['id']
+    except:
+        # User is not logged in
+        return False
+    else:
+        return True
+
+def deleteCookie(request):
+    dbCookie = Session.objects.get(session_key = request.session.session_key)
+    request.session.flush()
+    dbCookie.delete()
+
 @csrf_protect
 def newUser(request):
     time = datetime.datetime.now()
@@ -93,24 +107,15 @@ def modifypassword(request):
     return HttpResponseRedirect('/user/config')
 
 def removeUser(request):
-        #User ID
-        try:
-            id = request.session['id']
-        except:
-        # User is not logged in
+        if (not userIsLogged(request)):
             return HttpResponseRedirect('/')
-    
+        
+        # If the user is logged, is sure he has a valid id
+        user = Users.objects.get(id = request.session['id'])
+        
         try:
-            user = Users.objects.get(id = id)
-        except:
-                # User doesn't exist
-            return HttpResponseRedirect('/')
-        # User has been created
-        try:
-            user.deleteUser() # and saved to database
-            dbCookie = Session.objects.get(session_key = request.session.session_key)
-            request.session.flush()
-            dbCookie.delete()
+            user.deleteUser()
+            deleteCookie(request)
         except:
             request.session['regError'] = 'El usuario no existe en la base de datos.'
         return HttpResponseRedirect('/')
@@ -151,9 +156,7 @@ def logout(request):
     except:
         pass
     else:
-        dbSession = Session.objects.get(session_key = request.session.session_key)
-        dbSession.delete()
-        request.session.flush()
+        deleteCookie(request)
         return HttpResponseRedirect('/')
 
 def home(request):
@@ -170,7 +173,7 @@ def home(request):
                 raise CookieError
         except:
             # Bad cookie
-            request.session.flush()
+            deleteCookie(request)
             return HttpResponseRedirect('/')
         else:
             user = Users.objects.get(id = dbCookie['id'])
@@ -186,75 +189,52 @@ def home(request):
             return HttpResponse(t.render(c))
 
 def profile(request, id):
+    if (not userIsLogged(request)):
+        return HttpResponseRedirect("/")
+    
     try:
         user = Users.objects.get(id = id)
-        loggedUser = Users.objects.get(id = request.session['id'])
-        if (not Users.is_authenticated(session_key = request.session.session_key, cookie = request.session)):
-                raise CookieError
-    except CookieError:
-        # User has not logged in
-        request.session.flush()
-        return HttpResponseRedirect('/')
     except:
-        # Likely, user with id = id has not been found
-        return HttpResponseRedirect('/user/home')
+        # Likely, user doesn't exist
+        return HttpResponseRedirect("/user/home")
+    
+    loggedUser = Users.objects.get(id = request.session['id'])
+    if (not user.inactive):
+        # Rendering profile page using id
+        t = get_template('profile.html')
+        c = RequestContext(request, { 'ProfileUserName': user.username,
+                                      'ProfileName': user.name,
+                                      'ProfileSurname': user.surname,
+                                      'ProfileGender': user.gender,
+                                      'ProfileBirthdate': user.birthdate,
+                                      'UserID': loggedUser.id,
+                                      'UserName': loggedUser.username,
+                                      'section': 'Perfil' })
+        return HttpResponse(t.render(c))
     else:
-        if (not user.inactive):
-            # Rendering profile page using id
-            t = get_template('profile.html')
-            c = RequestContext(request, { 'ProfileUserName': user.username,
-                                         'ProfileName': user.name,
-                                         'ProfileSurname': user.surname,
-                                         'ProfileGender': user.gender,
-                                         'ProfileBirthdate': user.birthdate,
-                                         'UserID': loggedUser.id,
-                                         'UserName': loggedUser.username,
-                                         'section': 'Perfil' })
-            return HttpResponse(t.render(c))
-        else:
-            return HttpResponseRedirect('/user/home')
+        return HttpResponseRedirect('/user/home')
     
 def config(request):
-    try:
-        id = request.session['id']
-    except:
-        # User is not logged in
-        return HttpResponseRedirect('/')
-    else:
-        #User maybe has logged in
-        try:
-            dbCookie = Session.objects.get(session_key = request.session.session_key).get_decoded()
-            if (not Users.is_authenticated(session_key = request.session.session_key, cookie = request.session)):
-                raise CookieError
-        except:
-            # Bad cookie
-            request.session.flush()
-            return HttpResponseRedirect('/')
-        else:
-            user = Users.objects.get(id = dbCookie['id'])
-            t = get_template('config.html')
-            # Here we load all user information with context
-            context = {'UserID': user.id,
-                       'UserName': user.username,
-                       'Name': user.name,
-                       'Surname': user.surname,
-                       'Email': user.email,
-                       'Birthdate': user.birthdate,
-                       'Gender': user.gender,
-                       'section': 'Configuración'}
-            if (request.session.get('configError', False)):
-                context.update({ 'configError': request.session['configError'] })
-                del request.session['configError']
-            if (request.session.get('configOK', False)):
-                context.update({ 'configOK': request.session['configOK'] })
-                del request.session['configOK']
-            if (request.session.get('passwordError', False)):
-                context.update({ 'passwordError': request.session['passwordError'] })
-                del request.session['passwordError']
-            if (request.session.get('passwordOK', False)):
-                context.update({ 'passwordOK': request.session['passwordOK'] })
-                del request.session['passwordOK']
-            c = RequestContext(request, context)
-            return HttpResponse(t.render(c))    
-        
+    if (not userIsLogged(request)):
+        return HttpResponseRedirect("/")
+    
+    user = Users.objects.get(id = request.session['id'])
+    t = get_template('config.html')
+    # Here we load all user information with context
+    context = {'UserID': user.id,
+                'UserName': user.username,
+                'Name': user.name,
+                'Surname': user.surname,
+                'Email': user.email,
+                'Birthdate': user.birthdate,
+                'Gender': user.gender,
+                'section': 'Configuración'}
+    
+    flags = ['configError', 'configOK', 'passwordError', 'passwordOK']
+    for i in flags:
+        if (request.session.get(i,False)):
+            context.update({ i: request.session[i] })
+            del request.session[i]
+    c = RequestContext(request, context)
+    return HttpResponse(t.render(c))
         
