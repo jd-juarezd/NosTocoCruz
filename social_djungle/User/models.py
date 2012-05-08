@@ -100,3 +100,19 @@ class Users(models.Model):
                                  self.timestamp,
                                  str(datetime.datetime.now()))).hexdigest()
         return id
+
+class Friendships(models.Model):
+    user = models.ForeignKey('Users', related_name='+')
+    friend = models.ForeignKey('Users', related_name='+')
+    
+    def saveFriendship(self):
+        self.save()
+    
+    @classmethod
+    def deleteFriendship(cls, user1, user2):
+        pass
+    
+    @classmethod
+    def isFriend(cls, user1, user2): 
+        pass
+    
