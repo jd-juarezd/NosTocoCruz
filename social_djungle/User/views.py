@@ -202,11 +202,7 @@ def profile(request, id):
     if (not user.inactive):
         # Rendering profile page using id
         t = get_template('profile.html')
-        c = RequestContext(request, { 'ProfileUserName': user.username,
-                                      'ProfileName': user.name,
-                                      'ProfileSurname': user.surname,
-                                      'ProfileGender': user.gender,
-                                      'ProfileBirthdate': user.birthdate,
+        c = RequestContext(request, { 'ProfileUser': user,
                                       'UserID': loggedUser.id,
                                       'UserName': loggedUser.username,
                                       'section': 'Perfil' })
