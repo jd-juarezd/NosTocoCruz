@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.template.loader import get_template
 from django.template import RequestContext
 from django.contrib.sessions.models import Session
+from frontend.models import Notifications
 
 def userIsLogged(request):
     try:
@@ -28,12 +29,32 @@ def getFriends(user):
     friendsNames = []
     friendships = Friendships.objects.filter(user = user)
     for i in friendships:
-        friendsNames += [i.friend.username]
+        if i.confirmed:
+            friendsNames += [i.friend.username]
     friendships = Friendships.objects.filter(friend = user)
     for i in friendships:
-        friendsNames += [i.user.username]
+        if i.confirmed:
+            friendsNames += [i.user.username]
     friends = Users.objects.filter(username__in = friendsNames)
     return friends
+
+def getNotifications(user):
+    # Friendship request notification
+    friendshipRequests = Friendships.objects.filter(friend = user, confirmed=False)
+    notifications = []
+    friendMessage = "Peticion de amistad de"
+    m = ""
+    addFriendButton = """<a href="/user/acceptFriendship/%s" class="btn btn-success">Aceptar</a>"""
+    for i in friendshipRequests:
+        m = "%s %s" % (friendMessage, i.user.username)
+        notifications += [Notifications(message = m, buttonNeeded = True,  button = addFriendButton % i.pk)]
+    return notifications
+
+def renderCookieMessages(request,flags,context):
+    for i in flags:
+        if (request.session.get(i,False)):
+            context.update({ i: request.session[i] })
+            del request.session[i]
 
 @csrf_protect
 def newUser(request):
@@ -181,12 +202,23 @@ def home(request):
     friendPosts = Microposts.objects.filter(author__in=friends)
     posts = userPosts | friendPosts
     posts = posts.order_by('-date_post')
-    t = get_template('home.html')
+    
+    # Notifications to the user
+    notifications = getNotifications(user)
+    
+    context = { 'UserName': user.username,
+                'UserID': user.id,
+                'section': 'Home',
+                'micropostList': posts,
+                'notifications': notifications }
+
+    # Render possible messages passed by the cookie
+    flag = ['friendshipAccepted']
+    renderCookieMessages(request,flag,context)
+    
     # Here we load all user information with context
-    c = RequestContext(request, { 'UserName': user.username,
-                                    'UserID': user.id,
-                                    'section': 'Home',
-                                    'micropostList': posts })
+    t = get_template('home.html')
+    c = RequestContext(request, context)
     return HttpResponse(t.render(c))
 
 def profile(request, id):
@@ -228,10 +260,28 @@ def config(request):
                 'section': 'Configuración'}
     
     flags = ['configError', 'configOK', 'passwordError', 'passwordOK']
-    for i in flags:
-        if (request.session.get(i,False)):
-            context.update({ i: request.session[i] })
-            del request.session[i]
+    renderCookieMessages(request,flags, context)
     c = RequestContext(request, context)
     return HttpResponse(t.render(c))
+
+def acceptFriendship(request, friendshipID):
+    if (not userIsLogged(request)):
+        return HttpResponseRedirect("/")
+    
+    try:
+        friendship = Friendships.objects.get(pk = friendshipID)
+    except:
+        # Friendship with provided ID doesn't exist
+        request.session['friendshipAccepted'] = "Friendship with provided ID doesn't exist"
+        pass
+    else:
+        if (friendship.friend == Users.objects.get(id = request.session['id'])):
+            if not friendship.confirmed:
+                friendship.confirmed = True
+                friendship.save()
+                request.session['friendshipAccepted'] = "Se ha aceptado la peticion de amistad de %s" % friendship.user.username
+            else:
+                request.session['friendshipAccepted'] = 'Error!'
+    return HttpResponseRedirect("/user/home")
+    
         

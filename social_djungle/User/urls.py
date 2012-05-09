@@ -10,4 +10,5 @@ urlpatterns = patterns('User.views',
     url(r'^modifypassword/?$', 'modifypassword'),
     url(r'^modifydata/?$', 'modifydata'),
     url(r'^profile/([0-9]+)/?$', 'profile'),
+    url(r'^acceptFriendship/([0-9]+)/?', 'acceptFriendship'),
 )

@@ -53,8 +53,19 @@
 		<div class="span-content">
 			<h1> Notificaciones </h1>
 			<ul>
-				<li> Notificacion1</li>
-				<li> Notificacion2</li>
+				{% if friendshipAccepted %}
+					<div class="alert alert-success">
+						<a class="close" data-dismiss="alert">x</a> 
+						<strong> {{ friendshipAccepted }} </strong>
+					</div> 
+				{% endif %}
+				{% if notifications %}
+					{% for i in notifications %}
+						<li> {{ i.message }} {% if i.buttonNeeded %} {{ i.button|safe }} {% endif %}</li>
+					{% endfor %}
+				{% else %}
+				<li> No hay notificaciones</li>
+				{% endif %}
 			</ul>
 			<h1> Fotos </h1>
 			<ul class="thumbnails">
