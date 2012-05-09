@@ -232,13 +232,17 @@ def profile(request, id):
         return HttpResponseRedirect("/user/home")
     
     loggedUser = Users.objects.get(id = request.session['id'])
+    
+    # Profile's Owner microposts
+    microposts = Microposts.objects.filter(author=user)
     if (not user.inactive):
         # Rendering profile page using id
         t = get_template('profile.html')
         c = RequestContext(request, { 'ProfileUser': user,
                                       'UserID': loggedUser.id,
                                       'UserName': loggedUser.username,
-                                      'section': 'Perfil' })
+                                      'section': 'Perfil',
+                                      'micropostList': microposts })
         return HttpResponse(t.render(c))
     else:
         return HttpResponseRedirect('/user/home')
