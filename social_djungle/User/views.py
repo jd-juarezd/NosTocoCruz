@@ -300,12 +300,15 @@ def pics(request, id):
         return HttpResponseRedirect("/user/home")
     
     loggedUser = Users.objects.get(id = request.session['id'])
+    photos = Photos.objects.filter(author=loggedUser)
+    
     if (not user.inactive):
         # Rendering profile page using id
         t = get_template('pics.html')
         c = RequestContext(request, { 'ProfileUser': user,
                                       'UserID': loggedUser.id,
                                       'UserName': loggedUser.username,
+                                      'photoList': photos,
                                       'section': 'Fotos',})
         return HttpResponse(t.render(c))
     else:
@@ -316,12 +319,12 @@ def uploadPic(request):
         return HttpResponseRedirect("/")
     loggedUser = Users.objects.get(id = request.session['id'])
     try:
-        photo = Photos(name = request.POST['picname'], 
-                       image = request.POST['picfile'], 
+        photo = Photos(name = request.POST['picname'],
+                       image = request.FILES['picfile'],
                        author = loggedUser)
-        photo.save()
+        photo.savePhoto()
     except:
-        request.session['regError'] = 'Error en la subida de la imagen.'
+        pass
     return HttpResponseRedirect('/')
 
         

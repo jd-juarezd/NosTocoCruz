@@ -1,28 +1,47 @@
 {% extends 'loggedTemplate.html' %}
 
 {% block content %}
-<div class="hero-unit">
-  <h1>Fotos</h1>
-  <p>Subir foto</p>
-  <form id='subir_foto' method="post" action="/user/uploadpic"> {% csrf_token %}
-  	<fieldset>
-			<div class="control-group">
-				<label class="control-label" for="username">Nombre de la foto</label>
-				<div class="controls">
-					<input type="text" class="input-medium" name="picname">
-				</div>
+<div class="row">
+<div class="span8 span-style separe-bottom">
+<div class="span-content">
+  <h1>Galeria de fotos</h1>
+  <div class="pic-gallery">
+  	<ul class="thumbnails">
+  	{% for p in photoList %}
+  		<li class="pic">
+				<img src="{{ p.image.url }}" alt="{{ p.image.url }}">
+			</li>
+		{% endfor %}
+		</ul>
+		</div>
+</div>
+</div>
+<div class="span4 span-style separe-bottom">
+<div class="span-content">
+<h1>Subir foto</h1>
+<form id='subir_foto'  method="post" enctype="multipart/form-data" action="/user/uploadpic"> {% csrf_token %}
+  <fieldset>
+		<div class="control-group">
+			<label class="control-label" for="username">Nombre</label>
+			<div class="controls">
+				<input type="text" class="input-medium" name="picname">
 			</div>
-			<div class="control-group">
-				<div class="controls">
-					<input type="file" name="picfile">
-				</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">
+				<input type="file" name="picfile">
 			</div>
+		</div>
   	<div class="control-group">
-				<div class="controls">
-					<button class="btn btn-primary btn-small" type="submit" name="sendpic">Subir foto</button>
-				</div>
+			<div class="controls">
+				<button class="btn btn-primary btn-small" type="submit" name="sendpic">Subir foto</button>
 			</div>
+		</div>
 		</fieldset>
   </form>
 </div>
+</div>
+</div>
 {% endblock %}
+
+

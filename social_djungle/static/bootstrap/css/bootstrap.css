@@ -4131,7 +4131,28 @@ a.thumbnail:hover {
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
 }
+/* pics.html */
+.pic-gallery {
 
+}
+.pic-gallery li {
+	
+}
+.pic {
+	height: 260px;
+	width: 180px;
+	border: 1px solid #ddd;
+	-webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.pic img {
+	height: 260px;
+	width: 180px;
+}
 
 /* index.html */
 .bgcloud {
