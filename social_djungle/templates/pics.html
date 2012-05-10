@@ -7,11 +7,17 @@
   <h1>Galeria de fotos</h1>
   <div class="pic-gallery">
   	<ul class="thumbnails">
+  	{% if photoList %}
   	{% for p in photoList %}
   		<li class="pic">
+  		<a href="#" class="thumbnail">
 				<img src="{{ p.image.url }}" alt="{{ p.image.url }}">
+			</a>
 			</li>
 		{% endfor %}
+		{% else %}
+				<li> No hay fotos</li>
+		{% endif %}
 		</ul>
 		</div>
 </div>
@@ -19,7 +25,13 @@
 <div class="span4 span-style separe-bottom">
 <div class="span-content">
 <h1>Subir foto</h1>
-<form id='subir_foto'  method="post" enctype="multipart/form-data" action="/user/uploadpic"> {% csrf_token %}
+{% if newPhoto %}
+		<div class="alert success">
+			<a class="close" data-dismiss="alert">x</a> 
+			<strong> {{ newPhoto }} </strong>
+		</div> 
+{% endif %}
+<form id='subir_foto' method="post" enctype="multipart/form-data" action="/user/uploadpic"> {% csrf_token %}
   <fieldset>
 		<div class="control-group">
 			<label class="control-label" for="username">Nombre</label>

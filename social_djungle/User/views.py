@@ -318,13 +318,23 @@ def uploadPic(request):
     if (not userIsLogged(request)):
         return HttpResponseRedirect("/")
     loggedUser = Users.objects.get(id = request.session['id'])
+    photos = Photos.objects.filter(author=loggedUser)
+    
     try:
         photo = Photos(name = request.POST['picname'],
                        image = request.FILES['picfile'],
                        author = loggedUser)
         photo.savePhoto()
+        photos = Photos.objects.filter(author=loggedUser)
     except:
         pass
-    return HttpResponseRedirect('/')
+    t = get_template('pics.html')
+    c = RequestContext(request, { 'ProfileUser': loggedUser,
+                                    'UserID': loggedUser.id,
+                                    'UserName': loggedUser.username,
+                                    'photoList': photos,
+                                    'newPhoto': "Foto subida con éxito",
+                                    'section': 'Fotos',})
+    return HttpResponse(t.render(c))
 
         
