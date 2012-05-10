@@ -3,5 +3,26 @@
 {% block content %}
 <div class="hero-unit">
   <h1>Fotos</h1>
+  <p>Subir foto</p>
+  <form id='subir_foto' method="post" action="/user/uploadpic"> {% csrf_token %}
+  	<fieldset>
+			<div class="control-group">
+				<label class="control-label" for="username">Nombre de la foto</label>
+				<div class="controls">
+					<input type="text" class="input-medium" name="picname">
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<input type="file" name="picfile">
+				</div>
+			</div>
+  	<div class="control-group">
+				<div class="controls">
+					<button class="btn btn-primary btn-small" type="submit" name="sendpic">Subir foto</button>
+				</div>
+			</div>
+		</fieldset>
+  </form>
 </div>
 {% endblock %}

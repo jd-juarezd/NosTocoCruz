@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from User.models import Users, Friendships, ValidationError, CookieError
 from Micropost.models import Microposts
+from Photo.models import Photos
 from django.shortcuts import render_to_response, render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 import hashlib
@@ -287,5 +288,40 @@ def acceptFriendship(request, friendshipID):
             else:
                 request.session['friendshipAccepted'] = 'Error!'
     return HttpResponseRedirect("/user/home")
+
+# DEFINICION INICIAL DE SECCION FOTOS #
+def pics(request, id):
+    if (not userIsLogged(request)):
+        return HttpResponseRedirect("/")
+    try:
+        user = Users.objects.get(id = id)
+    except:
+        # Likely, user doesn't exist
+        return HttpResponseRedirect("/user/home")
     
+    loggedUser = Users.objects.get(id = request.session['id'])
+    if (not user.inactive):
+        # Rendering profile page using id
+        t = get_template('pics.html')
+        c = RequestContext(request, { 'ProfileUser': user,
+                                      'UserID': loggedUser.id,
+                                      'UserName': loggedUser.username,
+                                      'section': 'Fotos',})
+        return HttpResponse(t.render(c))
+    else:
+        return HttpResponseRedirect('/user/home')
+
+def uploadPic(request):
+    if (not userIsLogged(request)):
+        return HttpResponseRedirect("/")
+    loggedUser = Users.objects.get(id = request.session['id'])
+    try:
+        photo = Photos(name = request.POST['picname'], 
+                       image = request.POST['picfile'], 
+                       author = loggedUser)
+        photo.save()
+    except:
+        request.session['regError'] = 'Error en la subida de la imagen.'
+    return HttpResponseRedirect('/')
+
         
