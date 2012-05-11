@@ -4,7 +4,12 @@
 <div class="row">
 <div class="span8 span-style separe-bottom">
 <div class="span-content">
-  <h1>Galeria de fotos</h1>
+  {% if ProfileUser.id != UserID %}
+  <h1>Galeria de fotos de {{ ProfileUser.username }}</h1>
+  {% endif %}
+  {% if ProfileUser.id == UserID %}
+  <h1>Tu galeria de fotos </h1>
+  {% endif %}  
   <div class="pic-gallery">
   	<ul class="thumbnails">
   	{% if photoList %}

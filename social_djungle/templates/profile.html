@@ -1,7 +1,7 @@
 {% extends 'loggedTemplate.html' %}
 
 {% block content %}
-<div class="row profile-style">
+<div class="row profile-style center">
 		<div class="big-bgimage">
 			<img src="http://placehold.it/840x250">
 		</div>
@@ -13,14 +13,14 @@
 			<li>Nombre de usuario: {{ ProfileUser.name }} </li>
 			<li>Fecha de nacimiento: {{ ProfileUser.birthdate }}</li>
 			<li>Sexo: {{ ProfileUser.gender }}</li>
-			<li>Fotos</li>
+			<li><a href="/user/pics/{{ ProfileUser.id }}/">Fotos</a></li>
 		</ul>
 		<ul class="pull-right">
-			<li>Fotos</li>
+			<li><a href="/user/pics/{{ ProfileUser.id }}/">Fotos</a></li>
 			<li>Amigos</li>
 		</ul>
 </div>
-<div class="row profile-style separe-bottom">
+<div class="row profile-style center separe-bottom">
 	<h1>Últimas publicaciones</h1>
 	{% for m in micropostList %}
 		<div class="micropost">
