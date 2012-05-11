@@ -300,7 +300,14 @@ def pics(request, id):
         return HttpResponseRedirect("/user/home")
     
     loggedUser = Users.objects.get(id = request.session['id'])
-    photos = Photos.objects.filter(author=loggedUser)
+    
+    # To get to the photo gallery, the user and the owner
+    # have to be the same person or friends
+    if not ((user == loggedUser) or (Friendships.isFriend(user,loggedUser))):
+        # The gallery can't be accessed by the logged user
+        return HttpResponseRedirect("/user/home")
+    
+    photos = Photos.objects.filter(author=user)
     
     if (not user.inactive):
         # Rendering profile page using id

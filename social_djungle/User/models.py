@@ -122,9 +122,11 @@ class Friendships(models.Model):
     
     @classmethod
     def isFriend(cls, user1, user2): 
-        query = Friendships.objects.filter(user = Users.objects.get(username = user1), 
-                                           friend = Users.objects.get(username = user2))
-        if (query):
+        query1 = Friendships.objects.filter(user = user1, 
+                                           friend = user2)
+        query2 = Friendships.objects.filter(user = user2, 
+                                           friend = user1)
+        if (query1|query2):
             return True
         else:
             return False
