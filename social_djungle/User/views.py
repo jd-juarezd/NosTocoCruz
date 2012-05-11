@@ -304,7 +304,7 @@ def pics(request, id):
     
     # To get to the photo gallery, the user and the owner
     # have to be the same person or friends
-    if not ((user == loggedUser) or (Friendships.isFriend(user,loggedUser))):
+    if not ((user == loggedUser) or (Friendships.isFriend(user.username,loggedUser.username))):
         # The gallery can't be accessed by the logged user
         return HttpResponseRedirect("/user/home")
     
