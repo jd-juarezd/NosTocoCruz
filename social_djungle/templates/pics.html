@@ -9,9 +9,11 @@
   	<ul class="thumbnails">
   	{% if photoList %}
   	{% for p in photoList %}
-  		<li class="pic">
-  		<a href="#" class="thumbnail">
-				<img src="{{ p.image.url }}" alt="{{ p.image.url }}">
+  		<li>
+  		<a href="{{ p.image.url }}" class="thumbnail">
+  		<div class="pic">
+				<img src="{{ p.image.url }}" alt="{{ p.n }}">
+			</div>
 			</a>
 			</li>
 		{% endfor %}
@@ -31,7 +33,7 @@
 			<strong> {{ newPhoto }} </strong>
 		</div> 
 {% endif %}
-<form id='subir_foto' method="post" enctype="multipart/form-data" action="/user/uploadpic"> {% csrf_token %}
+<form id='subir_foto' class="span3" method="post" enctype="multipart/form-data" action="/user/uploadpic"> {% csrf_token %}
   <fieldset>
 		<div class="control-group">
 			<label class="control-label" for="username">Nombre</label>

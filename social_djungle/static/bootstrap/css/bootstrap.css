@@ -4118,7 +4118,7 @@ a.thumbnail:hover {
 	text-align: center;
 }
 .user-image {
-	position: fixed;
+	position: absolute;
 	margin-left: 20px;
 	margin-top: -150px;
 	float: left;
@@ -4143,9 +4143,10 @@ a.thumbnail:hover {
 	width: 260px;
 }
 .pic img {
-	height: 260px;
-	width: 260px;
+	max-height: 260px;
+	max-width: 260px;
 }
+
 
 /* index.html */
 .bgcloud {

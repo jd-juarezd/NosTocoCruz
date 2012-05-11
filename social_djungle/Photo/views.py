@@ -8,14 +8,9 @@ from django.template.loader import get_template
 from django.template import RequestContext
 from django.contrib.sessions.models import Session
 from PIL import Image
-import random
-INK = "red", "blue", "green", "yellow"
 
 def display (request, photoPath):
-    #image = Image.new("RGB", (800, 600), random.choice(INK))
-    response = HttpResponse()
-    #image.save(response, "PNG")
+    #Añadir aqui comprobaciones respecto a la foto que se pide
     query = Photos.objects.filter(image = photoPath)
     photo = query.get()
-    image = Image.open(photo.image)
     return HttpResponse(photo.image, mimetype="image/png")
