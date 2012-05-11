@@ -1,28 +1,21 @@
 # -*- coding: utf-8 -*-
-'''
-     
-from Photo.ImageModel import Photos
-from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
-from forms import AttachmentForm
+from User.models import Users, ValidationError, CookieError
+from Photo.models import Photos
+from django.shortcuts import render_to_response, render, redirect
+from django.http import HttpResponseRedirect, HttpResponse
+from django.views.decorators.csrf import csrf_protect
+from django.template.loader import get_template
+from django.template import RequestContext
+from django.contrib.sessions.models import Session
+from PIL import Image
+import random
+INK = "red", "blue", "green", "yellow"
 
-def index (request):
-     "Obtains the attachment and saves it to the disk"
-     if request. method == 'POST':
-         form = AttachmentForm(request.POST, request.FILES)
-         if form. is_valid ():
-             f = f.cleaned_data ['image']
-             foto = Photo()
-             foto.image.save(f.name, f)
-             foto.comments = form. cleaned_data ['comments']
-             foto.save()
-             return HttpResponseRedirect ('/')
-     else:
-         form = AttachmentForm()
-     fotos = Photo.objects.ajo()
-     return render_to_response ('index.html', {'form': form, 'fotos': fotos})
- 
-def display (request, id):
-     foto = Photo.objects.get(pk = id)
-     return render_to_response ('image.html', {'foto': foto})
-'''
+def display (request, photoPath):
+    #image = Image.new("RGB", (800, 600), random.choice(INK))
+    response = HttpResponse()
+    #image.save(response, "PNG")
+    query = Photos.objects.filter(image = photoPath)
+    photo = query.get()
+    image = Image.open(photo.image)
+    return HttpResponse(photo.image, mimetype="image/png")

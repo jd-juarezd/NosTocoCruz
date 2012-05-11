@@ -20,5 +20,6 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^user/?', include('User.urls')),
     url(r'^micropost/?', include('Micropost.urls')),
+    url(r'^files/?', include('Photo.urls')),
     url(r'^', include('frontend.urls')), 
 ) 

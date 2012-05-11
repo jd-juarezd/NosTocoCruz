@@ -3,7 +3,6 @@ from django.conf import settings
 from django.contrib import admin
 admin. autodiscover ()
 
-urlpatterns = patterns ('Photos.views',    
-      url (r'^$', 'index'),
-      url (r'^display/(?P<id>\d+)/$', 'display'),
+urlpatterns = patterns ('Photo.views',    
+      url (r'^(photos/\d+/.+)$', 'display'),
 )
