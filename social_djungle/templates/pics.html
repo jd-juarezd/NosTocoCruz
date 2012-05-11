@@ -8,18 +8,18 @@
   <div class="pic-gallery">
   	<ul class="thumbnails">
   	{% if photoList %}
-  	{% for p in photoList %}
-  		<li>
-  		<a href="{{ p.image.url }}" class="thumbnail">
-  		<div class="pic">
-				<img src="{{ p.image.url }}" alt="{{ p.name }}">
-			</div>
-			</a>
-			</li>
+  		{% for p in photoList %}
+	  		<li>
+	  		<!--	<a href="{{ p.image.url }}" class="thumbnail">-->
+  			<div class="pic thumbnail">
+					<img src="{{ p.image.url }}" alt="{{ p.name }}">
+				</div>
+				<!--</a>-->
+				</li>
 		{% endfor %}
-		{% else %}
+	{% else %}
 				<li> No hay fotos</li>
-		{% endif %}
+	{% endif %}
 		</ul>
 		</div>
 </div>
@@ -28,9 +28,15 @@
 <div class="span-content">
 <h1>Subir foto</h1>
 {% if newPhoto %}
-		<div class="alert success">
+		<div class="alert alert-success">
 			<a class="close" data-dismiss="alert">x</a> 
 			<strong> {{ newPhoto }} </strong>
+		</div> 
+{% endif %}
+{%  if errorPhoto %}
+	<div class="alert alert-error">
+			<a class="close" data-dismiss="alert">x</a> 
+			<strong> {{ errorPhoto }} </strong>
 		</div> 
 {% endif %}
 <form id='subir_foto' class="span3" method="post" enctype="multipart/form-data" action="/user/uploadpic"> {% csrf_token %}

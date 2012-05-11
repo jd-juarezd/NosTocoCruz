@@ -293,6 +293,7 @@ def acceptFriendship(request, friendshipID):
 def pics(request, id):
     if (not userIsLogged(request)):
         return HttpResponseRedirect("/")
+    
     try:
         user = Users.objects.get(id = id)
     except:
@@ -312,11 +313,14 @@ def pics(request, id):
     if (not user.inactive):
         # Rendering profile page using id
         t = get_template('pics.html')
-        c = RequestContext(request, { 'ProfileUser': user,
-                                      'UserID': loggedUser.id,
-                                      'UserName': loggedUser.username,
-                                      'photoList': photos,
-                                      'section': 'Fotos',})
+        context = { 'ProfileUser': user,
+                    'UserID': loggedUser.id,
+                    'UserName': loggedUser.username,
+                    'photoList': photos,
+                    'section': 'Fotos',}
+        flags = ['newPhoto','errorPhoto']
+        renderCookieMessages(request,flags,context)
+        c = RequestContext(request, context)
         return HttpResponse(t.render(c))
     else:
         return HttpResponseRedirect('/user/home')
@@ -324,6 +328,7 @@ def pics(request, id):
 def uploadPic(request):
     if (not userIsLogged(request)):
         return HttpResponseRedirect("/")
+
     loggedUser = Users.objects.get(id = request.session['id'])
     photos = Photos.objects.filter(author=loggedUser)
     
@@ -332,16 +337,9 @@ def uploadPic(request):
                        image = request.FILES['picfile'],
                        author = loggedUser)
         photo.savePhoto()
-        photos = Photos.objects.filter(author=loggedUser)
+        request.session['newPhoto'] = "Foto subida con éxito"
     except:
-        pass
-    t = get_template('pics.html')
-    c = RequestContext(request, { 'ProfileUser': loggedUser,
-                                    'UserID': loggedUser.id,
-                                    'UserName': loggedUser.username,
-                                    'photoList': photos,
-                                    'newPhoto': "Foto subida con éxito",
-                                    'section': 'Fotos',})
-    return HttpResponse(t.render(c))
+        request.session['errorPhoto'] = "Ha ocurrido un error al subir la foto."
+    return HttpResponseRedirect("/user/pics/%i/" % loggedUser.id)
 
         
