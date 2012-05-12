@@ -22,6 +22,7 @@ class Users(models.Model):
     gender = models.CharField(max_length = 10)
     birthdate = models.CharField(max_length = 10)
     inactive = models.BooleanField()
+    profilePhoto = models.CharField(max_length = 300)
     
     
     def __unicode__(self):
@@ -35,7 +36,15 @@ class Users(models.Model):
              raise ValidationError('No existe un usuario con ese nombre.')
         else:
             self.inactive = True  
-            self.save()         
+            self.save()      
+            
+    def getProfilePhoto(self):
+        if self.profilePhoto == "":
+            return "http://placehold.it/50x50"
+        else:   
+            return self.profilePhoto
+    def setProfilePhoto(self, url):
+        self.profilePhoto = url
         
     @classmethod
     def exists(cls, username):
@@ -86,6 +95,8 @@ class Users(models.Model):
             return False
 
     def saveUser(self):
+        if not self.profilePhoto:
+            self.profilePhoto = ""
         if (not Users.objects.filter(username=self.username)):
             self.save()
         else:

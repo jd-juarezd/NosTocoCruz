@@ -39,7 +39,7 @@
 	{% for m in micropostList %}
 		<div class="micropost">
 			<div class ="pull-left avatar">
-				<img src="http://placehold.it/50x50">
+				<img src="{{ m.author.getProfilePhoto }}" class="profileImg">
 			</div>
 			<div class="pull-left micropost-text">
 				<div class="micropost-header">
