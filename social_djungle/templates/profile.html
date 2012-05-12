@@ -1,6 +1,20 @@
 {% extends 'loggedTemplate.html' %}
 
 {% block content %}
+
+{% if notFriend %}
+<div class="row profile-style center">
+	<!-- Boton para peticion de amistad -->
+	Todavía no eres amigo de {{ ProfileUser.name }}.  <a href="/user/sendFriendship/{{ ProfileUser.id }}/" class="btn btn-success">Enviar petición de amistad</a>
+</div>
+{% endif %}
+{% if friendshipRequestSent %}
+<div class="alert alert-success">
+<a class="close" data-dismiss="alert">x</a> 
+<strong> {{ friendshipRequestSent }} </strong>
+</div> 
+{% endif %}
+
 <div class="row profile-style center">
 		<div class="big-bgimage">
 			<img src="http://placehold.it/840x250">

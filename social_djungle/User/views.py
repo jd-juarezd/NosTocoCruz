@@ -236,14 +236,24 @@ def profile(request, id):
     
     # Profile's Owner microposts
     microposts = Microposts.objects.filter(author=user)
+    
+    # Check if user is the same or friend of loggedUser
+    notFriend = True
+    if ((user == loggedUser) or (Friendships.isFriend(user.username, loggedUser.username))):
+        notFriend = False
+    
     if (not user.inactive):
         # Rendering profile page using id
         t = get_template('profile.html')
-        c = RequestContext(request, { 'ProfileUser': user,
-                                      'UserID': loggedUser.id,
-                                      'UserName': loggedUser.username,
-                                      'section': 'Perfil',
-                                      'micropostList': microposts })
+        context = { 'ProfileUser': user,
+                    'UserID': loggedUser.id,
+                    'UserName': loggedUser.username,
+                    'section': 'Perfil',
+                    'micropostList': microposts,
+                    'notFriend': notFriend }
+        flags = ['friendshipRequestSent']
+        renderCookieMessages(request,flags,context)
+        c = RequestContext(request, context)
         return HttpResponse(t.render(c))
     else:
         return HttpResponseRedirect('/user/home')
@@ -288,6 +298,25 @@ def acceptFriendship(request, friendshipID):
             else:
                 request.session['friendshipAccepted'] = 'Error!'
     return HttpResponseRedirect("/user/home")
+
+def sendFriendship(request,profileID):
+    if (not userIsLogged(request)):
+        return HttpResponseRedirect("/")
+    try:
+        user = Users.objects.get(id = profileID)
+    except:
+        # ID doesn't exist
+        return HttpResponseRedirect("/user/home")
+    
+    loggedUser = Users.objects.get(id = request.session['id'])
+    
+    if not Friendships.isFriend(user.username, loggedUser.username):
+        friendship = Friendships(user = loggedUser,
+                                friend = user,
+                                confirmed = False)
+        friendship.save()
+        request.session['friendshipRequestSent'] = "La petición se ha enviado correctamente."
+    return HttpResponseRedirect("/user/profile/%s/" % profileID)
 
 # DEFINICION INICIAL DE SECCION FOTOS #
 def pics(request, id):

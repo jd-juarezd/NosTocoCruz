@@ -25,4 +25,10 @@ class Photos(models.Model):
             self.delete()
         except:
             return "Error borrando la foto, inténtelo de nuevo."
+class UserProfilePhoto(models.Model):
+    photo = models.ForeignKey(Photos)
+    user = models.ForeignKey(Users)
+    
+    def __unicode__(self):
+        return "Foto de perfil de %s" % self.user.username
         

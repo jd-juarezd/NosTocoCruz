@@ -11,6 +11,7 @@ urlpatterns = patterns('User.views',
     url(r'^modifydata/?$', 'modifydata'),
     url(r'^profile/([0-9]+)/?$', 'profile'),
     url(r'^acceptFriendship/([0-9]+)/?', 'acceptFriendship'),
+    url(r'^sendFriendship/([0-9]+)/?', 'sendFriendship'),
     #DEFINICION INICIAL DE SECCION FOTOS
     url(r'^pics/([0-9]+)/?$', 'pics'),
     url(r'^uploadpic/?$', 'uploadPic')
