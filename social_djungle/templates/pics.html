@@ -4,6 +4,20 @@
 <div class="row">
 <div class="span8 span-style separe-bottom">
 <div class="span-content">
+	
+	{% if changeImgOK %}
+	<div class="alert alert-success">
+		<a class="close" data-dismiss="alert">x</a> 
+		<strong> {{ changeImgOK }} </strong>
+	</div>
+	{% endif %}
+	{% if changeImgFailed %}
+	<div class="alert alert-error">
+		<a class="close" data-dismiss="alert">x</a> 
+		<strong> {{ changeImgFailed }} </strong>
+	</div>
+	{% endif %}
+	
   {% if ProfileUser.id != UserID %}
   <h1>Galeria de fotos de {{ ProfileUser.username }}</h1>
   {% endif %}
@@ -15,11 +29,14 @@
   	{% if photoList %}
   		{% for p in photoList %}
 	  		<li>
-	  		<!--	<a href="{{ p.image.url }}" class="thumbnail">-->
   			<div class="pic thumbnail">
 					<img src="{{ p.image.url }}" alt="{{ p.name }}">
-				</div>
-				<!--</a>-->
+			</div>
+			{% if ProfileUser.id == UserID %}
+			<div>
+				<a href="/user/makeProfileImg/{{ p.id }}/" onclick="return confirm('¿Hacer de esta imagen su imagen principal?');" class="pull-right"><i class="icon-user"></i> Hacer principal</a>
+			</div>
+			{% endif %}
 				</li>
 		{% endfor %}
 	{% else %}

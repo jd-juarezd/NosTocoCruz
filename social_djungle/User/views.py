@@ -347,7 +347,7 @@ def pics(request, id):
                     'UserName': loggedUser.username,
                     'photoList': photos,
                     'section': 'Fotos',}
-        flags = ['newPhoto','errorPhoto']
+        flags = ['newPhoto','errorPhoto','changeImgOK','changeImgFailed']
         renderCookieMessages(request,flags,context)
         c = RequestContext(request, context)
         return HttpResponse(t.render(c))
@@ -369,6 +369,27 @@ def uploadPic(request):
         request.session['newPhoto'] = "Foto subida con éxito"
     except:
         request.session['errorPhoto'] = "Ha ocurrido un error al subir la foto."
+    return HttpResponseRedirect("/user/pics/%i/" % loggedUser.id)
+
+def makeProfileImg(request,imgID):
+    if (not userIsLogged(request)):
+        return HttpResponseRedirect("/")
+    
+    loggedUser = Users.objects.get(id = request.session['id'])
+    
+    try:
+        img = Photos.objects.get(id = imgID)
+    except:
+        # img with id imgID doesn't exist
+        pass
+    else:
+        # Make sure the user is the owner
+        if (loggedUser == img.author):
+            loggedUser.profilePhoto = img.image.url
+            loggedUser.save()
+            request.session['changeImgOK'] = "Se ha actualizado su imagen principal."
+        else:
+            request.session['changeImgFailed'] = "Error al actualizar su imagen principal. Asegúrese de que es el propietario de la imagen."
     return HttpResponseRedirect("/user/pics/%i/" % loggedUser.id)
 
         
