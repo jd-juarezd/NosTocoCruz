@@ -1,7 +1,40 @@
 {% extends 'loggedTemplate.html' %}
 
 {% block content %}
-<div class="hero-unit">
-  <h1>Gente</h1>
+<div class="row">
+	<div class="span8 span-style separe-bottom">
+		<div class="span-content">
+			<h1>Amigos</h1>
+			
+			{% for f in friendList %}
+			<div class="friend">
+			<div class ="pull-left avatar">
+				<img src="{{ f.getProfilePhoto }}" class="profileImg">
+			</div>
+			<div class="pull-left">
+				<h2>{{ f.username }}</h2>
+			</div>
+			<div class="pull-left">
+				<ul>
+					<li class="pull-left">
+						<a href="#">
+							<button class="btn btn-small">
+								<i class="icon-share"></i>Enviar Mensaje
+							</button>
+						</a>	
+					</li>
+					<li class="pull-left">
+						<a href="#">
+							<button class="btn btn-small">
+								<i class="icon-remove"></i>Borrar Amigo</button>
+						</a>
+					</li>
+				</ul>
+			</div>
+			</div>
+		{% endfor %}
+		</div>
+	</div>
 </div>
+	
 {% endblock %}

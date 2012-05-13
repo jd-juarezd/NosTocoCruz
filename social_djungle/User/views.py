@@ -392,4 +392,26 @@ def makeProfileImg(request,imgID):
             request.session['changeImgFailed'] = "Error al actualizar su imagen principal. Asegúrese de que es el propietario de la imagen."
     return HttpResponseRedirect("/user/pics/%i/" % loggedUser.id)
 
+def people(request, id):
+    if (not userIsLogged(request)):
+        return HttpResponseRedirect("/")
+    
+    try:
+        user = Users.objects.get(id = id)
+    except:
+        # Likely, user doesn't exist
+        return HttpResponseRedirect("/user/home")
+    
+    loggedUser = Users.objects.get(id = request.session['id'])
+    friendList = getFriends(loggedUser)
+    
+    t = get_template('people.html')
+    context = { 'ProfileUser': user,
+                'UserID': loggedUser.id,
+                'UserName': loggedUser.username,
+                'friendList': friendList,
+                'section': 'Gente',}
+    c = RequestContext(request, context)
+    return HttpResponse(t.render(c))
+
         

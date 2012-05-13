@@ -4147,6 +4147,23 @@ a.thumbnail:hover {
 	max-width: 260px;
 }
 
+/* people.html */
+.friend {
+	border-top: 1px dotted #aaa;
+	clear:both;
+	margin: 0;
+	padding: 10px;
+	-webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.friend ul {
+	margin: 0;
+	padding-left: 15px;
+	list-style: none;
+}
+
 
 /* index.html */
 .bgcloud {
