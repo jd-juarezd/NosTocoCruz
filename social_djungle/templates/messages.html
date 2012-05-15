@@ -1,7 +1,27 @@
 {% extends 'loggedTemplate.html' %}
 
 {% block content %}
-<div class="hero-unit">
-  <h1>Mensajes</h1>
+<div class="row profile-style center separe-bottom">
+	<h1>Mensajes privados</h1>
+	{% for m in msgList %}
+		<div class="micropost">
+			<div class ="pull-left avatar">
+				<img src="{{ m.sender.getProfilePhoto }}">
+			</div>
+			<div class="pull-left micropost-text">
+				<div class="micropost-header">
+					<ul>
+							<li class="pull-left"><a href="/user/profile/{{ m.sender.id }}/">{{ m.sender.username }}</a></li>
+					</ul>
+				</div>
+				<div class="micropost-content">
+					<pre>{{ m.text }}</pre>
+				</div>
+			</div>
+			{% if m.author.username == UserName %}
+			<a class="pull-right" href="/micropost/delete/{{ m.id_post }}" onclick="return confirm('¿Está seguro de que desea borrar el micropost?');"><i class="icon-trash"></i> Borrar</a>
+			{% endif %}
+		</div>
+		{% endfor %}
 </div>
 {% endblock %}

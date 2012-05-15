@@ -16,5 +16,6 @@ urlpatterns = patterns('User.views',
     url(r'^pics/([0-9]+)/?$', 'pics'),
     url(r'^makeProfileImg/([0-9]+)/?', 'makeProfileImg'),
     url(r'^uploadpic/?$', 'uploadPic'),
-    url(r'^people/([0-9]+)/?$', 'people')
+    url(r'^people/([0-9]+)/?$', 'people'),
+    url(r'^messages/?$', 'messages'),
 )

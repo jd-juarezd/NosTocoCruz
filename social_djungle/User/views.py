@@ -11,6 +11,7 @@ from django.template.loader import get_template
 from django.template import RequestContext
 from django.contrib.sessions.models import Session
 from frontend.models import Notifications
+from Message.models import Messages
 
 def userIsLogged(request):
     try:
@@ -236,7 +237,7 @@ def profile(request, id):
     
     # Profile's Owner microposts
     microposts = Microposts.objects.filter(author=user)
-    
+    microposts = microposts.order_by('-date_post')
     # Check if user is the same or friend of loggedUser
     notFriend = True
     if ((user == loggedUser) or (Friendships.isFriend(user.username, loggedUser.username))):
@@ -417,6 +418,22 @@ def people(request, id):
                 'friendList': friendList,
                 'section': 'Gente',
                 'peopleList': people}
+    c = RequestContext(request, context)
+    return HttpResponse(t.render(c))
+
+def messages(request):
+    if (not userIsLogged(request)):
+        return HttpResponseRedirect("/")
+    
+    loggedUser = Users.objects.get(id = request.session['id'])
+    
+    msgList = Messages.objects.filter(receiver=loggedUser)
+    
+    t = get_template('messages.html')
+    context = { 'UserID': loggedUser.id,
+                'UserName': loggedUser.username,
+                'section': 'Mensajes',
+                'msgList': msgList}
     c = RequestContext(request, context)
     return HttpResponse(t.render(c))
 
