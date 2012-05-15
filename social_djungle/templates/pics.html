@@ -61,7 +61,7 @@
 			<strong> {{ errorPhoto }} </strong>
 		</div> 
 {% endif %}
-<form id='subir_foto' class="span3" method="post" enctype="multipart/form-data" action="/user/uploadpic"> {% csrf_token %}
+<form id='subir_foto' method="post" enctype="multipart/form-data" action="/user/uploadpic"> {% csrf_token %}
   <fieldset>
 		<div class="control-group">
 			<label class="control-label" for="username">Nombre</label>
@@ -71,7 +71,9 @@
 		</div>
 		<div class="control-group">
 			<div class="controls">
-				<input type="file" name="picfile">
+				<div class="pic-upload">
+					<input class="input-medium" type="file" name="picfile">
+				</div>
 			</div>
 		</div>
   	<div class="control-group">

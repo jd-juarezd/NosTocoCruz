@@ -4132,12 +4132,30 @@ a.thumbnail:hover {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 /* pics.html */
-.pic-gallery {
+.pic-upload {
+   position: relative;
+   margin-top: -5px;
+   margin-bottom: 15px;
+   width: 80px;
+   height: 24px;
+   overflow:hidden;
+   background:url(../../img/btn_upload.png) left top no-repeat;
+   clip:rect(0px, 80px, 24px, 0px );
+}  
 
+.pic-upload input {
+   position: absolute;
+   left: auto;
+   right: 0px;
+   top: 0px;
+   margin:0;
+   padding:0;
+   filter: Alpha(Opacity=0);
+   -moz-opacity: 0;
+   opacity: 0;
 }
-.pic-gallery li {
-	
-}
+
+
 .pic {
 	height: 260px;
 	width: 260px;
