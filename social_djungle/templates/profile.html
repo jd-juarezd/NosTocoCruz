@@ -20,7 +20,7 @@
 			<img src="http://placehold.it/840x250">
 		</div>
 		<div class="user-image">
-			<img src="http://placehold.it/260x180">
+			<img src="{{ ProfileUser.getProfilePhoto }}" >
 		</div>
 		<h1>{{ ProfileUser.name}} {{ ProfileUser.surname}}</h1>
 		<ul class="pull-left">
@@ -39,7 +39,7 @@
 	{% for m in micropostList %}
 		<div class="micropost">
 			<div class ="pull-left avatar">
-				<img src="{{ m.author.getProfilePhoto }}" class="profileImg">
+				<img src="{{ m.author.getProfilePhoto }}">
 			</div>
 			<div class="pull-left micropost-text">
 				<div class="micropost-header">

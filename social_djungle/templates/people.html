@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="row">
-	<div class="span8 span-style separe-bottom">
+	<div class="span8 span-style">
 		<div class="span-content">
 			<h1>Amigos</h1>
 			
@@ -37,4 +37,40 @@
 	</div>
 </div>
 	
+<div class="row">
+	<div class="span8 span-style separe-bottom">
+		<div class="span-content">
+			<h1>Otra gente</h1>
+			
+			{% for f in peopleList %}
+			<div class="friend">
+			<div class ="pull-left avatar">
+				<img src="{{ f.getProfilePhoto }}" class="profileImg">
+			</div>
+			<div class="pull-left">
+				<h2><a href="/user/profile/{{ f.id }}/">{{ f.username }} </a></h2>
+			</div>
+			<!--
+			<div class="pull-left">
+				<ul>
+					<li class="pull-left">
+						<a href="#">
+							<button class="btn btn-small">
+								<i class="icon-share"></i>Enviar Mensaje
+							</button>
+						</a>	
+					</li>
+					<li class="pull-left">
+						<a href="#">
+							<button class="btn btn-small">
+								<i class="icon-user"></i>Agregar amigo</button>
+						</a>
+					</li>
+				</ul>
+			</div> -->
+			</div>
+		{% endfor %}
+		</div>
+	</div>
+</div>
 {% endblock %}

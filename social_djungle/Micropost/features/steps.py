@@ -16,7 +16,7 @@ def setUp():
                  gender = 'Hombre',
                  timestamp = datetime.datetime.now())
     world.user = user
-    user.save()
+    user.saveUser()
 
 @step(r'I create a sample micropost')
 def write_micropost(step):
@@ -54,7 +54,7 @@ def owner_post(step):
 @after.all
 def cleaning(arg):
     try:
-        user = Users.objects.get(username = world.user.username)
+        user = Users.objects.get(username = 'TestUser')
     except:
         pass
     else:

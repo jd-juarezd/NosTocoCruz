@@ -404,13 +404,19 @@ def people(request, id):
     
     loggedUser = Users.objects.get(id = request.session['id'])
     friendList = getFriends(loggedUser)
+    people = Users.objects.all()
+    for i in friendList:
+        people = people.exclude(username = i.username)
+    
+    people = people.exclude(username = loggedUser.username)
     
     t = get_template('people.html')
     context = { 'ProfileUser': user,
                 'UserID': loggedUser.id,
                 'UserName': loggedUser.username,
                 'friendList': friendList,
-                'section': 'Gente',}
+                'section': 'Gente',
+                'peopleList': people}
     c = RequestContext(request, context)
     return HttpResponse(t.render(c))
 

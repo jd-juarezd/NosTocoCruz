@@ -4046,8 +4046,11 @@ a.thumbnail:hover {
 	-webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-	height: 50px;
+  background-color: #FFF;
+}
+.avatar img {
 	width: 50px;
+	height: 50px;
 }
 .micropost-text {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -4130,6 +4133,11 @@ a.thumbnail:hover {
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+  background-color: #FFF;
+}
+.user-image img {
+  	height: 180px;
+	width: 180px;
 }
 /* pics.html */
 .pic-gallery {
@@ -4271,7 +4279,4 @@ a.thumbnail:hover {
   white-space: nowrap;
   text-decoration: underline;
 }
-.profileImg {
-	width: 50px;
-	height: 50px;
-}
+
