@@ -18,5 +18,5 @@ urlpatterns = patterns('User.views',
     url(r'^makeBackgroundImg/([0-9]+)/?', 'makeBackgroundImg'),
     url(r'^uploadpic/?$', 'uploadPic'),
     url(r'^people/([0-9]+)/?$', 'people'),
-    url(r'^messages/?$', 'messages'),
+    url(r'^messages/(received|sent)/?$', 'RenderMessages'),
 )

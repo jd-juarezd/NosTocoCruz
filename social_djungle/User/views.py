@@ -443,14 +443,14 @@ def people(request, id):
     c = RequestContext(request, context)
     return HttpResponse(t.render(c))
 
-def messages(request):
-    if (not userIsLogged(request)):
-        return HttpResponseRedirect("/")
-    
-    loggedUser = Users.objects.get(id = request.session['id'])
-    
-    msgList = Messages.objects.filter(receiver=loggedUser)
-    
+def getMessages(user, sent = True):
+    if sent:
+        return Messages.objects.filter(sender=user)
+    else:
+        return Messages.objects.filter(receiver=user)
+
+def returnMessages(request, loggedUser, msgList):
+
     t = get_template('messages.html')
     context = { 'UserID': loggedUser.id,
                 'UserName': loggedUser.username,
@@ -459,4 +459,19 @@ def messages(request):
     c = RequestContext(request, context)
     return HttpResponse(t.render(c))
 
-        
+def RenderMessages(request, option):
+    if (not userIsLogged(request)):
+        return HttpResponseRedirect("/")
+    
+    loggedUser = Users.objects.get(id = request.session['id'])
+    if str(option)=="received":
+        sent = False
+    elif str(option)=="sent":
+        sent = True
+    else:
+        return HttpResponseRedirect("/")
+    msgList = getMessages(user = loggedUser, sent = sent)
+    return returnMessages(request,loggedUser,msgList)
+
+    
+    
