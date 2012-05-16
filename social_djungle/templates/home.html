@@ -17,13 +17,15 @@
 		</div>
 	</div>
 </div>-->
+<script src="{{ STATIC_URL }}bootstrap/js/contador-caracteres.js"></script>
 <div class="row">
 	<div class="span8 span-style separe-bottom">
 		<div class="span-content">
 			<h1> Publicar </h1>
-			<form class="inline-form" id="newMicropost" method="post" action="/micropost/new"> {% csrf_token %}
-				<textarea name="publication" class="input-xlarge" rows="2" placeholder="Escriba aquí lo que se le ocurra..."></textarea>
-				<button class="btn btn-primary btn-large" type="submit">Publicar</button>
+			<form id="newMicropost" method="post" action="/micropost/new"> {% csrf_token %}
+				<textarea name="publication" class="input-xlarge" rows="2" placeholder="Escriba aquí lo que se le ocurra..."
+				onkeyup="calcLength();" onkeydown="calcLength();"></textarea>
+				<button id="micropostButton" class="btn btn-primary btn-large" type="submit" disabled>Publicar</button>
 			</form>
 			<h1> Timeline </h1>
 		</div>
