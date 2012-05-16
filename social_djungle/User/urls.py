@@ -17,5 +17,5 @@ urlpatterns = patterns('User.views',
     url(r'^makeProfileImg/([0-9]+)/?', 'makeProfileImg'),
     url(r'^uploadpic/?$', 'uploadPic'),
     url(r'^people/([0-9]+)/?$', 'people'),
-    url(r'^messages/?$', 'messages'),
+    url(r'^messages/(received|sent)/?$', 'RenderMessages'),
 )

@@ -1,8 +1,11 @@
 {% extends 'loggedTemplate.html' %}
 
 {% block content %}
-<div class="row profile-style center separe-bottom">
+<div class="row separe-bottom">
+	<div class="span8 span-style">
+		<div class="span-content">
 	<h1>Mensajes privados</h1>
+	{% if msgList %}
 	{% for m in msgList %}
 		<div class="micropost">
 			<div class ="pull-left avatar">
@@ -11,7 +14,11 @@
 			<div class="pull-left micropost-text">
 				<div class="micropost-header">
 					<ul>
-							<li class="pull-left"><a href="/user/profile/{{ m.sender.id }}/">{{ m.sender.username }}</a></li>
+							<li class="pull-left">
+								<a href="/user/profile/{{ m.sender.id }}/">{{ m.sender.username }}</a>
+								&gt;
+								<a href="/user/profile/{{ m.receiver.id }}/">{{ m.receiver.username }}</a>								
+							</li>
 					</ul>
 				</div>
 				<div class="micropost-content">
@@ -23,5 +30,19 @@
 			{% endif %}
 		</div>
 		{% endfor %}
+		{% else %}
+		No hay mensajes que mostrar.
+		{% endif %}
+		</div>
+	</div>
+	<div class="span4 span-style">
+		<div class="span-content">
+		<h1>Buzones</h1>
+		<ul>
+			<li><a href="/user/messages/received/">Recibidos</a></li>
+			<li><a href="/user/messages/sent/">Enviados</a></li>
+		</ul>
+		</div>
+	</div>
 </div>
 {% endblock %}
