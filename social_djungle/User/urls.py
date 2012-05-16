@@ -15,6 +15,7 @@ urlpatterns = patterns('User.views',
     #DEFINICION INICIAL DE SECCION FOTOS
     url(r'^pics/([0-9]+)/?$', 'pics'),
     url(r'^makeProfileImg/([0-9]+)/?', 'makeProfileImg'),
+    url(r'^makeBackgroundImg/([0-9]+)/?', 'makeBackgroundImg'),
     url(r'^uploadpic/?$', 'uploadPic'),
     url(r'^people/([0-9]+)/?$', 'people'),
     url(r'^messages/?$', 'messages'),

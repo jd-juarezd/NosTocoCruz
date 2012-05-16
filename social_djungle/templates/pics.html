@@ -35,6 +35,7 @@
 			{% if ProfileUser.id == UserID %}
 			<div>
 				<a href="/user/makeProfileImg/{{ p.id }}/" onclick="return confirm('¿Hacer de esta imagen su imagen principal?');" class="pull-right"><i class="icon-user"></i> Hacer principal</a>
+				<a href="/user/makeBackgroundImg/{{ p.id }}/" onclick="return confirm('¿Hacer de esta imagen su imagen de fondo?');" class="pull-right"><i class="icon-user"></i> Hacer foto de fondo</a>			
 			</div>
 			{% endif %}
 				</li>

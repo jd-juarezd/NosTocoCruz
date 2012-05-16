@@ -393,6 +393,28 @@ def makeProfileImg(request,imgID):
             request.session['changeImgFailed'] = "Error al actualizar su imagen principal. Asegúrese de que es el propietario de la imagen."
     return HttpResponseRedirect("/user/pics/%i/" % loggedUser.id)
 
+def makeBackgroundImg(request,imgID):
+    if (not userIsLogged(request)):
+        return HttpResponseRedirect("/")
+    
+    loggedUser = Users.objects.get(id = request.session['id'])
+    
+    try:
+        img = Photos.objects.get(id = imgID)
+    except:
+        # img with id imgID doesn't exist
+        pass
+    else:
+        # Make sure the user is the owner
+        if (loggedUser == img.author):
+            loggedUser.backgroundPhoto = img.image.url
+            loggedUser.save()
+            request.session['changeImgOK'] = "Se ha actualizado su imagen de fondo."
+        else:
+            request.session['changeImgFailed'] = "Error al actualizar su imagen de fondo. Asegúrese de que es el propietario de la imagen."
+    return HttpResponseRedirect("/user/pics/%i/" % loggedUser.id)
+
+
 def people(request, id):
     if (not userIsLogged(request)):
         return HttpResponseRedirect("/")

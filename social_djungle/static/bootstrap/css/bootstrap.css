@@ -4098,7 +4098,6 @@ a.thumbnail:hover {
 }
 /* profile.html */
 .big-bgimage {
-	height: 250px;
 	z-index: -50;
 	border: 1px solid #ddd;
   -webkit-border-radius: 4px;
@@ -4107,6 +4106,11 @@ a.thumbnail:hover {
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+ 
+}
+.big-bgimage img {
+  	height: 250px;
+	width: 840px;
 }
 .profile-style {
 	width: 842px;

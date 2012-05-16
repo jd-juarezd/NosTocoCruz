@@ -23,6 +23,7 @@ class Users(models.Model):
     birthdate = models.CharField(max_length = 10)
     inactive = models.BooleanField()
     profilePhoto = models.CharField(max_length = 300)
+    backgroundPhoto = models.CharField(max_length = 300)
     
     
     def __unicode__(self):
@@ -45,6 +46,14 @@ class Users(models.Model):
             return self.profilePhoto
     def setProfilePhoto(self, url):
         self.profilePhoto = url
+        
+    def getBackgroundPhoto(self):
+        if self.backgroundPhoto == "":
+            return "http://placehold.it/840x250"
+        else:   
+            return self.backgroundPhoto
+    def setBackgroundPhoto(self, url):
+        self.backgroundPhoto = url
         
     @classmethod
     def exists(cls, username):
